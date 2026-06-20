@@ -753,48 +753,76 @@
                 <h2 style="font-size:3rem;font-weight:900;" class="sc"><span class="gold">القطاعات الاستثمارية</span></h2>
                 <p style="font-size:1rem;opacity:0.6;margin-top:0.3rem;" class="sc">انقر على أي قطاع لمشاهدة صوره</p>
             </div>
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;" class="sc">
+            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;" class="sc">
 
-                <!-- التحول الرقمي -->
-                <div class="glass sector-card has-images" onclick="openSectorAlbum('digital-transformation')" style="padding:1.6rem;text-align:center;border-radius:1.4rem;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.9rem;"><path d="M20 3H4v10c0 1.1.9 2 2 2h3v2H7v2h10v-2h-2v-2h3c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 10H6V5h14v8z"/><path d="M11.5 12.5h1v1h-1zm-3 0h1v1h-1zm6 0h1v1h-1z"/></svg>
-                    <h3 style="font-size:1.2rem;font-weight:800;color:#F0D060;margin-bottom:0.5rem;">التحول الرقمي</h3>
-                    <span style="background:rgba(212,175,55,0.2);color:#F0D060;font-size:0.85rem;padding:0.3rem 0.9rem;border-radius:999px;border:1px solid rgba(212,175,55,0.5);">14 صورة ←</span>
+                <!-- التكنولوجيا والتحول الرقمي -->
+                <div class="glass sector-card has-images" onclick="openSectorAlbum('digital-transformation')" style="padding:1.2rem 0.8rem;text-align:center;border-radius:1.2rem;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.6rem;"><path d="M20 3H4v10c0 1.1.9 2 2 2h3v2H7v2h10v-2h-2v-2h3c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 10H6V5h14v8z"/></svg>
+                    <h3 style="font-size:0.88rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;line-height:1.3;">التكنولوجيا والتحول الرقمي</h3>
+                    <span style="background:rgba(212,175,55,0.2);color:#F0D060;font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:999px;border:1px solid rgba(212,175,55,0.5);">14 صورة ←</span>
                 </div>
 
-                <!-- تجارة الغذاء -->
-                <div class="glass sector-card has-images" onclick="openSectorAlbum('food-trade')" style="padding:1.6rem;text-align:center;border-radius:1.4rem;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.9rem;"><path d="M18.06 22.99h1.66c.84 0 1.53-.64 1.63-1.46L23 5.05h-5V1h-1.97v4.05h-4.97l.3 2.34c1.71.47 3.31 1.32 4.27 2.26 1.44 1.42 2.43 2.89 2.43 5.29v8.05zM1 21.99V21h15.03v.99c0 .55-.45 1-1.01 1H2.01c-.56 0-1.01-.45-1.01-1zm15.03-7c0-8-15.03-8-15.03 0h15.03zM1.02 17h15v2H1.02z"/></svg>
-                    <h3 style="font-size:1.2rem;font-weight:800;color:#F0D060;margin-bottom:0.5rem;">تجارة الغذاء والسلع</h3>
-                    <span style="background:rgba(212,175,55,0.2);color:#F0D060;font-size:0.85rem;padding:0.3rem 0.9rem;border-radius:999px;border:1px solid rgba(212,175,55,0.5);">4 صور ←</span>
+                <!-- الخدمات المالية الإلكترونية -->
+                <div class="glass sector-card" style="padding:1.2rem 0.8rem;text-align:center;border-radius:1.2rem;opacity:0.5;cursor:not-allowed;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.6rem;"><path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+                    <h3 style="font-size:0.88rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;line-height:1.3;">الخدمات المالية الإلكترونية</h3>
+                    <span style="background:rgba(212,175,55,0.15);color:#D4AF37;font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:999px;border:1px solid rgba(212,175,55,0.35);">قريباً</span>
                 </div>
 
-                <!-- البنية التحتية -->
-                <div class="glass sector-card has-images" onclick="openSectorAlbum('infrastructure')" style="padding:1.6rem;text-align:center;border-radius:1.4rem;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.9rem;"><path d="M13 2.05V4.07c3.94.49 7 3.85 7 7.93s-3.05 7.44-7 7.93v2.02c5.05-.5 9-4.76 9-9.95S18.05 2.55 13 2.05zM11 2.06C7.06 2.56 4 5.92 4 10s3.05 7.44 7 7.93V19.95C5.96 19.44 2 15.18 2 10c0-5.18 3.96-9.44 9-9.94v2.0zm-1.14 7.43l-1.06.71 2.58 3.86 1.44-.96-2.96-3.61zm3.86-.72l1.07.71-2.58 3.86-1.44-.96 2.95-3.61z"/></svg>
-                    <h3 style="font-size:1.2rem;font-weight:800;color:#F0D060;margin-bottom:0.5rem;">البنية التحتية</h3>
-                    <span style="background:rgba(212,175,55,0.2);color:#F0D060;font-size:0.85rem;padding:0.3rem 0.9rem;border-radius:999px;border:1px solid rgba(212,175,55,0.5);">11 صورة ←</span>
+                <!-- التطوير العقاري والسياحي -->
+                <div class="glass sector-card has-images" onclick="openSectorAlbum('tourism-investment')" style="padding:1.2rem 0.8rem;text-align:center;border-radius:1.2rem;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.6rem;"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/></svg>
+                    <h3 style="font-size:0.88rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;line-height:1.3;">التطوير العقاري والسياحي</h3>
+                    <span style="background:rgba(212,175,55,0.2);color:#F0D060;font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:999px;border:1px solid rgba(212,175,55,0.5);">30 صورة ←</span>
                 </div>
 
-                <!-- تجارة المجوهرات -->
-                <div class="glass sector-card" style="padding:1.6rem;text-align:center;border-radius:1.4rem;opacity:0.5;cursor:not-allowed;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.9rem;"><path d="M16 3H8L2 9l10 13L22 9l-6-6zm-1.4 2l1.5 2.5h-8.2L9.4 5h5.2zM4.5 9h3.6l2.5 8.5L4.5 9zm11.4 0h3.6l-6.1 8.5L15.9 9zm-1.5 0l-2.4 8-2.4-8h4.8z"/></svg>
-                    <h3 style="font-size:1.2rem;font-weight:800;color:#F0D060;margin-bottom:0.5rem;">تجارة المجوهرات والمعادن</h3>
-                    <span style="background:rgba(212,175,55,0.15);color:#D4AF37;font-size:0.85rem;padding:0.3rem 0.9rem;border-radius:999px;border:1px solid rgba(212,175,55,0.35);">قريباً</span>
+                <!-- التعليم والتأهيل -->
+                <div class="glass sector-card" style="padding:1.2rem 0.8rem;text-align:center;border-radius:1.2rem;opacity:0.5;cursor:not-allowed;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.6rem;"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+                    <h3 style="font-size:0.88rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;line-height:1.3;">التعليم والتأهيل</h3>
+                    <span style="background:rgba(212,175,55,0.15);color:#D4AF37;font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:999px;border:1px solid rgba(212,175,55,0.35);">قريباً</span>
                 </div>
 
-                <!-- التكنولوجيا -->
-                <div class="glass sector-card" style="padding:1.6rem;text-align:center;border-radius:1.4rem;opacity:0.5;cursor:not-allowed;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.9rem;"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
-                    <h3 style="font-size:1.2rem;font-weight:800;color:#F0D060;margin-bottom:0.5rem;">التكنولوجيا والابتكار</h3>
-                    <span style="background:rgba(212,175,55,0.15);color:#D4AF37;font-size:0.85rem;padding:0.3rem 0.9rem;border-radius:999px;border:1px solid rgba(212,175,55,0.35);">قريباً</span>
+                <!-- التنمية والاستثمار الزراعي -->
+                <div class="glass sector-card" style="padding:1.2rem 0.8rem;text-align:center;border-radius:1.2rem;opacity:0.5;cursor:not-allowed;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.6rem;"><path d="M17 8C8 10 5.9 16.17 3.82 21H5.71c.51-1.2 1.06-2.38 1.7-3.47C9.96 14.56 14.5 13 20 13c0-5.76-3.35-8-3-5z M12.67 11.36C11.47 10.5 10.1 10 8.5 10c-3.31 0-6 2.69-6 6 0 .34.03.67.08 1H4.6c-.07-.32-.1-.66-.1-1 0-2.21 1.79-4 4-4 1.04 0 1.99.39 2.72 1.03l1.45-1.67z"/></svg>
+                    <h3 style="font-size:0.88rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;line-height:1.3;">التنمية والاستثمار الزراعي</h3>
+                    <span style="background:rgba(212,175,55,0.15);color:#D4AF37;font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:999px;border:1px solid rgba(212,175,55,0.35);">قريباً</span>
                 </div>
 
-                <!-- الاستثمار السياحي -->
-                <div class="glass sector-card has-images" onclick="openSectorAlbum('tourism-investment')" style="padding:1.6rem;text-align:center;border-radius:1.4rem;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.9rem;"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/></svg>
-                    <h3 style="font-size:1.2rem;font-weight:800;color:#F0D060;margin-bottom:0.5rem;">الاستثمار السياحي</h3>
-                    <span style="background:rgba(212,175,55,0.2);color:#F0D060;font-size:0.85rem;padding:0.3rem 0.9rem;border-radius:999px;border:1px solid rgba(212,175,55,0.5);">30 صورة ←</span>
+                <!-- المجوهرات والمعادن الثمينة -->
+                <div class="glass sector-card" style="padding:1.2rem 0.8rem;text-align:center;border-radius:1.2rem;opacity:0.5;cursor:not-allowed;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.6rem;"><path d="M16 3H8L2 9l10 13L22 9l-6-6zm-1.4 2l1.5 2.5h-8.2L9.4 5h5.2zM4.5 9h3.6l2.5 8.5L4.5 9zm11.4 0h3.6l-6.1 8.5L15.9 9zm-1.5 0l-2.4 8-2.4-8h4.8z"/></svg>
+                    <h3 style="font-size:0.88rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;line-height:1.3;">المجوهرات والمعادن الثمينة</h3>
+                    <span style="background:rgba(212,175,55,0.15);color:#D4AF37;font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:999px;border:1px solid rgba(212,175,55,0.35);">قريباً</span>
+                </div>
+
+                <!-- استيراد وتوزيع المواد الغذائية -->
+                <div class="glass sector-card has-images" onclick="openSectorAlbum('food-trade')" style="padding:1.2rem 0.8rem;text-align:center;border-radius:1.2rem;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.6rem;"><path d="M18.06 22.99h1.66c.84 0 1.53-.64 1.63-1.46L23 5.05h-5V1h-1.97v4.05h-4.97l.3 2.34c1.71.47 3.31 1.32 4.27 2.26 1.44 1.42 2.43 2.89 2.43 5.29v8.05zM1 21.99V21h15.03v.99c0 .55-.45 1-1.01 1H2.01c-.56 0-1.01-.45-1.01-1zm15.03-7c0-8-15.03-8-15.03 0h15.03zM1.02 17h15v2H1.02z"/></svg>
+                    <h3 style="font-size:0.88rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;line-height:1.3;">استيراد وتوزيع المواد الغذائية</h3>
+                    <span style="background:rgba(212,175,55,0.2);color:#F0D060;font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:999px;border:1px solid rgba(212,175,55,0.5);">4 صور ←</span>
+                </div>
+
+                <!-- تجارة التجزئة الإلكترونية -->
+                <div class="glass sector-card" style="padding:1.2rem 0.8rem;text-align:center;border-radius:1.2rem;opacity:0.5;cursor:not-allowed;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.6rem;"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96C5 16.1 6.9 18 9 18h12v-2H9.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H19c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0023.46 5H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                    <h3 style="font-size:0.88rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;line-height:1.3;">تجارة التجزئة الإلكترونية</h3>
+                    <span style="background:rgba(212,175,55,0.15);color:#D4AF37;font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:999px;border:1px solid rgba(212,175,55,0.35);">قريباً</span>
+                </div>
+
+                <!-- البنية التحتية والخدمات النفطية -->
+                <div class="glass sector-card has-images" onclick="openSectorAlbum('infrastructure')" style="padding:1.2rem 0.8rem;text-align:center;border-radius:1.2rem;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.6rem;"><path d="M13 2.05V4.07c3.94.49 7 3.85 7 7.93s-3.05 7.44-7 7.93v2.02c5.05-.5 9-4.76 9-9.95S18.05 2.55 13 2.05zM11 2.06C7.06 2.56 4 5.92 4 10s3.05 7.44 7 7.93V19.95C5.96 19.44 2 15.18 2 10c0-5.18 3.96-9.44 9-9.94v2.0z"/></svg>
+                    <h3 style="font-size:0.88rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;line-height:1.3;">البنية التحتية والخدمات النفطية</h3>
+                    <span style="background:rgba(212,175,55,0.2);color:#F0D060;font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:999px;border:1px solid rgba(212,175,55,0.5);">11 صورة ←</span>
+                </div>
+
+                <!-- الفرص التجارية -->
+                <div class="glass sector-card" style="padding:1.2rem 0.8rem;text-align:center;border-radius:1.2rem;opacity:0.5;cursor:not-allowed;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.6rem;"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+                    <h3 style="font-size:0.88rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;line-height:1.3;">الفرص التجارية المتوافقة مع سياسات المؤسسة</h3>
+                    <span style="background:rgba(212,175,55,0.15);color:#D4AF37;font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:999px;border:1px solid rgba(212,175,55,0.35);">قريباً</span>
                 </div>
 
             </div>
