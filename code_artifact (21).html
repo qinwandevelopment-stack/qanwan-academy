@@ -239,14 +239,15 @@
 <!-- Navigation Dots -->
 <div class="nav-dots" id="navDots">
     <div class="nav-dot active" data-label="الرئيسية"      onclick="goToSlide(0)"></div>
-    <div class="nav-dot"        data-label="نبذة تعريفية"   onclick="goToSlide(1)"></div>
-    <div class="nav-dot"        data-label="مسار التحول"    onclick="goToSlide(2)"></div>
-    <div class="nav-dot"        data-label="فلسفة الشركة"   onclick="goToSlide(3)"></div>
-    <div class="nav-dot"        data-label="الرؤية"         onclick="goToSlide(4)"></div>
-    <div class="nav-dot"        data-label="الأهداف"        onclick="goToSlide(5)"></div>
-    <div class="nav-dot"        data-label="المبادرات"      onclick="goToSlide(6)"></div>
-    <div class="nav-dot"        data-label="الشراكات"       onclick="goToSlide(7)"></div>
-    <div class="nav-dot"        data-label="شركاء النجاح"   onclick="goToSlide(8)"></div>
+    <div class="nav-dot"        data-label="عرض تعريفي"     onclick="goToSlide(1)"></div>
+    <div class="nav-dot"        data-label="نبذة تعريفية"   onclick="goToSlide(2)"></div>
+    <div class="nav-dot"        data-label="مسار التحول"    onclick="goToSlide(3)"></div>
+    <div class="nav-dot"        data-label="فلسفة الشركة"   onclick="goToSlide(4)"></div>
+    <div class="nav-dot"        data-label="الرؤية"         onclick="goToSlide(5)"></div>
+    <div class="nav-dot"        data-label="الأهداف"        onclick="goToSlide(6)"></div>
+    <div class="nav-dot"        data-label="المبادرات"      onclick="goToSlide(7)"></div>
+    <div class="nav-dot"        data-label="الشراكات"       onclick="goToSlide(8)"></div>
+    <div class="nav-dot"        data-label="شركاء النجاح"   onclick="goToSlide(9)"></div>
 </div>
 
 <div class="nav-arrow nav-arrow-up"  id="arrowUp"   onclick="prevSlide()">
@@ -294,10 +295,25 @@
         <div class="wm">01</div>
     </div>
 
+    <!-- ======== SLIDE 2 — عرض تعريفي (فيديو) ======== -->
+    <div class="slide" id="slide-1" style="background:#000;">
+        <video autoplay loop muted playsinline preload="auto"
+               style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+            <source src="assets/videos/v2.mp4" type="video/mp4">
+        </video>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.45) 30%,transparent);z-index:1;"></div>
+        <!-- شعار الشركة زاوية يمين سفلى -->
+        <img src="assets/icons/option 2 png (2).png" alt="شعار قنوان"
+             style="position:absolute;bottom:2rem;right:2rem;width:160px;z-index:10;
+                    filter:brightness(0) invert(1) drop-shadow(0 2px 12px rgba(0,0,0,0.6));
+                    opacity:0.9;">
+        <div class="wm">02</div>
+    </div>
+
     <!-- ======== SLIDE 2 — نبذة تعريفية ======== -->
-    <div class="slide" id="slide-1" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+    <div class="slide" id="slide-2" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
         <div style="max-width:64rem;width:100%;padding:0 2rem;">
-            <p class="slide-label sc">الشريحة 02</p>
+            <p class="slide-label sc">الشريحة 03</p>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;">
                 <div class="sc">
                     <h2 style="font-size:3rem;font-weight:900;margin-bottom:1.5rem;"><span class="gold">نبذة تعريفية</span></h2>
@@ -326,13 +342,13 @@
                 </div>
             </div>
         </div>
-        <div class="wm">02</div>
+        <div class="wm">03</div>
     </div>
 
     <!-- ======== SLIDE 3 — مسار التحول ======== -->
-    <div class="slide" id="slide-2" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+    <div class="slide" id="slide-3" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
         <div style="max-width:64rem;width:100%;padding:0 2rem;">
-            <p class="slide-label sc">الشريحة 03</p>
+            <p class="slide-label sc">الشريحة 04</p>
             <h2 style="font-size:3rem;font-weight:900;margin-bottom:2.5rem;" class="sc"><span class="gold">مسار التحول والنجاح</span></h2>
             <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;" class="sc">
                 <div class="glass" style="padding:1.4rem;text-align:center;border-radius:1.25rem;">
@@ -363,13 +379,13 @@
             </div>
             <div style="height:4px;background:linear-gradient(to left,#f59e0b,rgba(212,175,55,0.1));border-radius:999px;margin-top:1.5rem;margin-right:12.5%;width:75%;" class="sc"></div>
         </div>
-        <div class="wm">03</div>
+        <div class="wm">04</div>
     </div>
 
     <!-- ======== SLIDE 4 — فلسفة الشركة ======== -->
-    <div class="slide" id="slide-3" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+    <div class="slide" id="slide-4" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
         <div style="max-width:64rem;width:100%;padding:0 2rem;">
-            <p class="slide-label sc">الشريحة 04</p>
+            <p class="slide-label sc">الشريحة 05</p>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;">
                 <div>
                     <h2 style="font-size:3rem;font-weight:900;margin-bottom:2rem;" class="sc"><span class="gold">فلسفة الشركة</span></h2>
@@ -413,13 +429,13 @@
                 </div>
             </div>
         </div>
-        <div class="wm">04</div>
+        <div class="wm">05</div>
     </div>
 
     <!-- ======== SLIDE 5 — الرؤية ======== -->
-    <div class="slide" id="slide-4" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+    <div class="slide" id="slide-5" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
         <div style="max-width:64rem;width:100%;padding:0 2rem;text-align:center;">
-            <p class="slide-label sc">الشريحة 05</p>
+            <p class="slide-label sc">الشريحة 06</p>
             <h2 style="font-size:3.5rem;font-weight:900;margin-bottom:0.5rem;" class="sc"><span class="gold">الرؤية</span></h2>
             <p style="font-size:1.1rem;opacity:0.6;margin-bottom:2rem;" class="sc">2025 — 2030</p>
             <div class="sc glass" style="padding:2.5rem;max-width:42rem;margin:0 auto 2rem;border-radius:1.5rem;">
@@ -451,13 +467,13 @@
                 </div>
             </div>
         </div>
-        <div class="wm">05</div>
+        <div class="wm">06</div>
     </div>
 
     <!-- ======== SLIDE 6 — الأهداف ======== -->
-    <div class="slide" id="slide-5" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+    <div class="slide" id="slide-6" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
         <div style="max-width:64rem;width:100%;padding:0 2rem;">
-            <p class="slide-label sc">الشريحة 06</p>
+            <p class="slide-label sc">الشريحة 07</p>
             <h2 style="font-size:3rem;font-weight:900;margin-bottom:2rem;" class="sc"><span class="gold">الأهداف الاستراتيجية</span></h2>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;" class="sc">
                 <div class="glass" style="padding:1.1rem 1.4rem;display:flex;gap:1rem;align-items:center;border-radius:1rem;">
@@ -486,13 +502,13 @@
                 </div>
             </div>
         </div>
-        <div class="wm">06</div>
+        <div class="wm">07</div>
     </div>
 
     <!-- ======== SLIDE 7 — المبادرات ======== -->
-    <div class="slide" id="slide-6" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+    <div class="slide" id="slide-7" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
         <div style="max-width:64rem;width:100%;padding:0 2rem;">
-            <p class="slide-label sc">الشريحة 07</p>
+            <p class="slide-label sc">الشريحة 08</p>
             <h2 style="font-size:3rem;font-weight:900;margin-bottom:2rem;" class="sc"><span class="gold">المبادرات الوطنية والإقليمية</span></h2>
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;" class="sc">
                 <div class="glass" style="padding:1.5rem;text-align:center;border-radius:1.25rem;">
@@ -539,13 +555,13 @@
                 </div>
             </div>
         </div>
-        <div class="wm">07</div>
+        <div class="wm">08</div>
     </div>
 
     <!-- ======== SLIDE 8 — الشراكات ======== -->
-    <div class="slide" id="slide-7" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+    <div class="slide" id="slide-8" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
         <div style="max-width:64rem;width:100%;padding:0 2rem;">
-            <p class="slide-label sc">الشريحة 08</p>
+            <p class="slide-label sc">الشريحة 09</p>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;">
                 <div class="sc">
                     <h2 style="font-size:3rem;font-weight:900;margin-bottom:1.5rem;"><span class="gold">الشراكات الاستراتيجية</span></h2>
@@ -594,14 +610,14 @@
                 </div>
             </div>
         </div>
-        <div class="wm">08</div>
+        <div class="wm">09</div>
     </div>
 
     <!-- ======== SLIDE 9 — شركاء النجاح ======== -->
-    <div class="slide" id="slide-8" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+    <div class="slide" id="slide-9" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
         <div style="max-width:80rem;width:100%;padding:0 1.5rem;">
             <div style="text-align:center;margin-bottom:0.75rem;">
-                <p class="slide-label sc">الشريحة 09</p>
+                <p class="slide-label sc">الشريحة 10</p>
                 <h2 style="font-size:2rem;font-weight:900;" class="sc"><span class="gold">شركاء النجاح</span></h2>
                 <p style="font-size:0.8rem;opacity:0.55;margin-top:0.15rem;" class="sc">الشركاء الاستراتيجيون</p>
             </div>
@@ -633,7 +649,7 @@
 
 <script>
     let current = 0;
-    const total = 9;
+    const total = 10;
     const container    = document.getElementById('slidesContainer');
     const dots         = document.querySelectorAll('.nav-dot');
     const slides       = document.querySelectorAll('.slide');
@@ -641,23 +657,25 @@
     let isProgrammatic = false;
 
     const logoConfigs = [
-        // 0: Hero — أعلى الوسط، ضخم، نقطة ارتكاز
+        // 0: Hero
         () => ({ top: 28, left: window.innerWidth / 2 - 210, width: 420, opacity: 1 }),
-        // 1: نبذة — أعلى اليمين خارج منطقة المحتوى
+        // 1: فيديو v2 — مخفي (الشعار ثابت في الشريحة)
+        () => ({ top: window.innerHeight - 100, left: window.innerWidth - 95, width: 80, opacity: 0 }),
+        // 2: نبذة — أعلى اليمين
         () => ({ top: 18, left: window.innerWidth - 120, width: 100, opacity: 0.35 }),
-        // 2: مسار التحول — أسفل اليمين
+        // 3: مسار التحول — أسفل اليمين
         () => ({ top: window.innerHeight - 130, left: window.innerWidth - 120, width: 100, opacity: 0.35 }),
-        // 3: الفلسفة — أعلى اليسار
+        // 4: الفلسفة — أعلى اليسار
         () => ({ top: 18, left: 18, width: 100, opacity: 0.35 }),
-        // 4: الرؤية — أسفل اليسار
+        // 5: الرؤية — أسفل اليسار
         () => ({ top: window.innerHeight - 130, left: 18, width: 100, opacity: 0.35 }),
-        // 5: الأهداف — أعلى اليمين
+        // 6: الأهداف — أعلى اليمين
         () => ({ top: 18, left: window.innerWidth - 120, width: 100, opacity: 0.35 }),
-        // 6: المبادرات — أسفل اليسار
+        // 7: المبادرات — أسفل اليسار
         () => ({ top: window.innerHeight - 130, left: 18, width: 100, opacity: 0.35 }),
-        // 7: الشراكات — أعلى اليسار
+        // 8: الشراكات — أعلى اليسار
         () => ({ top: 18, left: 18, width: 100, opacity: 0.35 }),
-        // 8: شركاء النجاح — أسفل اليمين، خافت جداً
+        // 9: شركاء النجاح — أسفل اليمين خافت
         () => ({ top: window.innerHeight - 100, left: window.innerWidth - 95, width: 80, opacity: 0.2 }),
     ];
 
@@ -738,10 +756,10 @@
         dots.forEach((d, j) => d.classList.toggle('active', j === i));
         slides.forEach(s => s.classList.remove('active'));
         animateLogo(i);
-        if (i !== 8) resetPartners();
+        if (i !== 9) resetPartners();
         setTimeout(() => {
             slides[i].classList.add('active');
-            if (i === 8) triggerPartners();
+            if (i === 9) triggerPartners();
         }, 400);
         document.getElementById('arrowUp').style.display   = i > 0        ? 'flex' : 'none';
         document.getElementById('arrowDown').style.display = i < total - 1 ? 'flex' : 'none';
