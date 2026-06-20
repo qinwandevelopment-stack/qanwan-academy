@@ -201,12 +201,12 @@
             display: flex;
             gap: 1rem;
             will-change: transform;
-            animation: sectorMarquee 40s linear infinite;
             cursor: grab;
+            user-select: none;
+            animation: sectorMarquee 60s linear infinite;
         }
-        #s9-marquee-track:hover {
-            animation-play-state: paused;
-        }
+        #s9-marquee-track.paused { animation-play-state: paused; }
+        #s9-marquee-track.dragging { cursor: grabbing; animation: none !important; }
         .marquee-img {
             height: calc(100vh - 160px);
             width: auto;
@@ -217,6 +217,7 @@
             box-shadow: 0 6px 30px rgba(0,0,0,0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 2px solid rgba(212,175,55,0.2);
+            pointer-events: auto;
         }
         .marquee-img:hover {
             transform: scale(1.03);
@@ -825,7 +826,7 @@
                 <p id="s9-album-count" style="position:absolute;left:1.5rem;color:rgba(255,255,255,0.45);font-size:0.8rem;margin:0;"></p>
             </div>
             <!-- الشريط المتحرك -->
-            <div style="flex:1;overflow:hidden;display:flex;align-items:center;padding:1rem 0;">
+            <div id="s9-marquee-wrap" style="flex:1;overflow:hidden;display:flex;align-items:center;padding:1rem 0;">
                 <div id="s9-marquee-track"></div>
             </div>
             <p style="text-align:center;color:rgba(255,255,255,0.35);font-size:0.75rem;padding:0.5rem;flex-shrink:0;">مرر فوق الصورة للإيقاف &nbsp;·&nbsp; انقر لتكبيرها</p>
@@ -1170,10 +1171,13 @@
       var titleEl = document.getElementById('s9-album-title');
       var countEl = document.getElementById('s9-album-count');
       var trackEl = document.getElementById('s9-marquee-track');
+      var wrapEl  = document.getElementById('s9-marquee-wrap');
 
       titleEl.textContent = data.label;
       countEl.textContent = data.images.length + ' صورة';
       trackEl.innerHTML = '';
+      trackEl.style.transform = '';
+      trackEl.classList.remove('dragging','paused');
 
       // بناء الصور مرتين لحلقة لا نهاية
       var allSrcs = data.images.concat(data.images);
@@ -1181,14 +1185,80 @@
         var img = document.createElement('img');
         img.className = 'marquee-img';
         img.src = src;
-        img.loading = 'lazy';
-        img.onclick = function(e){ e.stopPropagation(); openLightbox(src); };
+        img.loading = 'eager';
+        img.addEventListener('click', function(e){ e.stopPropagation(); if (!_dragged) openLightbox(src); });
         trackEl.appendChild(img);
       });
 
-      // سرعة الحركة: 2 ثانية لكل صورة
-      var dur = data.images.length * 2;
+      // ضبط سرعة animation: n ثانية = n/عدد_الصور لكل صورة
+      var dur = data.images.length * 3;
       trackEl.style.animationDuration = dur + 's';
+
+      // سحب بالماوس
+      var _isDragging = false, _dragged = false;
+      var _dragStartX = 0, _dragScrollTime = 0;
+      var _manualOffset = 0;
+
+      function getDragOffset(e) { return (e.touches ? e.touches[0].clientX : e.clientX); }
+
+      function onDragStart(e) {
+        _isDragging = true; _dragged = false;
+        _dragStartX = getDragOffset(e);
+        var matrix = new DOMMatrix(window.getComputedStyle(trackEl).transform);
+        _manualOffset = matrix.m41;
+        trackEl.classList.add('dragging');
+        trackEl.style.transform = 'translateX(' + _manualOffset + 'px)';
+      }
+      function onDragMove(e) {
+        if (!_isDragging) return;
+        e.preventDefault();
+        var dx = getDragOffset(e) - _dragStartX;
+        if (Math.abs(dx) > 4) _dragged = true;
+        trackEl.style.transform = 'translateX(' + (_manualOffset + dx) + 'px)';
+      }
+      function onDragEnd() {
+        if (!_isDragging) return;
+        _isDragging = false;
+        trackEl.classList.remove('dragging');
+        // استئناف animation من مكانه الحالي
+        var half = trackEl.scrollWidth / 2;
+        var cur = parseFloat(trackEl.style.transform.match(/-?[\d.]+/) || [0]);
+        var pct = half > 0 ? ((-cur / half) * 100) : 0;
+        pct = ((pct % 100) + 100) % 100;
+        trackEl.style.animation = 'none';
+        trackEl.offsetHeight; // reflow
+        var dur2 = parseFloat(trackEl.style.animationDuration) || dur;
+        trackEl.style.animation = 'sectorMarquee ' + dur2 + 's linear ' + (-(pct/100)*dur2) + 's infinite';
+        trackEl.style.transform = '';
+        setTimeout(function(){ _dragged = false; }, 50);
+      }
+
+      trackEl.addEventListener('mousedown', onDragStart);
+      trackEl.addEventListener('touchstart', onDragStart, { passive: true });
+      document.addEventListener('mousemove', onDragMove);
+      document.addEventListener('touchmove', onDragMove, { passive: false });
+      document.addEventListener('mouseup', onDragEnd);
+      document.addEventListener('touchend', onDragEnd);
+
+      // تمرير بعجلة الماوس
+      wrapEl.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        var half = trackEl.scrollWidth / 2;
+        var matrix = new DOMMatrix(window.getComputedStyle(trackEl).transform);
+        var cur = matrix.m41;
+        var newX = cur - (e.deltaX || e.deltaY) * 2;
+        trackEl.style.animation = 'none';
+        trackEl.offsetHeight;
+        trackEl.style.transform = 'translateX(' + newX + 'px)';
+        clearTimeout(wrapEl._wheelTimer);
+        wrapEl._wheelTimer = setTimeout(function(){
+          var pct = half > 0 ? ((-newX / half) * 100) : 0;
+          pct = ((pct % 100) + 100) % 100;
+          var dur2 = parseFloat(trackEl.style.animationDuration) || dur;
+          trackEl.style.animation = 'sectorMarquee ' + dur2 + 's linear ' + (-(pct/100)*dur2) + 's infinite';
+          trackEl.style.transform = '';
+        }, 400);
+      }, { passive: false });
 
       // إظهار الألبوم
       cardsEl.style.transition = 'opacity 0.3s';
@@ -1203,6 +1273,9 @@
     }
 
     function closeSectorAlbum() {
+      if (window._marqueeRaf) { cancelAnimationFrame(window._marqueeRaf); window._marqueeRaf = null; }
+      var trackEl = document.getElementById('s9-marquee-track');
+      if (trackEl) { trackEl.style.animation = ''; trackEl.style.transform = ''; }
       var cardsEl = document.getElementById('s9-cards');
       var albumEl = document.getElementById('s9-album');
       albumEl.style.transition = 'opacity 0.3s';
