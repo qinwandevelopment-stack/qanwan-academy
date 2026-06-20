@@ -1306,7 +1306,7 @@
         if (i !== 13 && i !== 14 && i !== 15) resetPartners();
         setTimeout(() => {
             slides[i].classList.add('active');
-            if (i === 13 || i === 14 || i === 15) triggerPartners(i);
+            if (i === 12 || i === 13 || i === 14) triggerPartners(i);
         }, 400);
         document.getElementById('arrowUp').style.display   = i > 0        ? 'flex' : 'none';
         document.getElementById('arrowDown').style.display = i < total - 1 ? 'flex' : 'none';
