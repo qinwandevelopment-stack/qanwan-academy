@@ -255,8 +255,8 @@
 <div class="slides-container" id="slidesContainer">
 
     <!-- ======== SLIDE 1 — Hero ======== -->
-    <div class="slide active" id="slide-0">
-        <video id="hero-video" autoplay loop muted playsinline>
+    <div class="slide active" id="slide-0" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%)">
+        <video id="hero-video" autoplay loop muted playsinline preload="auto">
             <source src="assets/videos/hero_bg.mp4" type="video/mp4">
         </video>
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65) 35%,transparent);z-index:1;"></div>
@@ -699,6 +699,15 @@
     });
 
     updateUI(0);
+
+    // إجبار الفيديو على التشغيل بعد التحميل
+    const vid = document.getElementById('hero-video');
+    if (vid) {
+        vid.muted = true;
+        const tryPlay = () => vid.play().catch(() => {});
+        vid.addEventListener('canplay', tryPlay, { once: true });
+        tryPlay();
+    }
 
 </script>
 </body>
