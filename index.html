@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملف التعريفي | قنوان للاستثمار</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===================== BASE ===================== */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Cairo', 'Tahoma', 'Arial', sans-serif; color: #ffffff; overflow: hidden; }
+
+        .slides-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+        .slides-container::-webkit-scrollbar { display: none; }
+
+        .slide {
+            height: 100vh;
+            scroll-snap-align: start;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* ===================== NAV DOTS ===================== */
+        .nav-dots {
+            position: fixed;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            align-items: center;
+        }
+        .nav-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.35);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.5);
+            position: relative;
+        }
+        .nav-dot:hover::after {
+            content: attr(data-label);
+            position: absolute;
+            right: 1.5rem;
+            top: 50%; transform: translateY(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+        }
+        .nav-dot.active {
+            background: #f59e0b;
+            border-color: #f59e0b;
+            width: 12px; height: 12px;
+        }
+
+        /* ===================== ARROWS ===================== */
+        .nav-arrow {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 200;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            width: 44px; height: 44px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(8px);
+        }
+        .nav-arrow:hover { background: rgba(245,158,11,0.4); border-color: #f59e0b; }
+        .nav-arrow-down { bottom: 1.5rem; }
+        .nav-arrow-up  { top: 1.5rem; }
+
+        /* ===================== SLIDE LABEL ===================== */
+        .slide-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            color: #f59e0b;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===================== GLASS ===================== */
+        .glass {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 1.25rem;
+        }
+
+        /* ===================== GOLD UNDERLINE ===================== */
+        .gold { border-bottom: 3px solid #f59e0b; padding-bottom: 0.2rem; display: inline-block; }
+
+        /* ===================== WATERMARK ===================== */
+        .wm {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 4rem;
+            font-size: 7rem;
+            font-weight: 900;
+            opacity: 0.05;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        /* ===================== CONTENT ANIMATION ===================== */
+        .sc {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        .slide.active .sc { opacity: 1; transform: translateY(0); }
+        .slide.active .sc:nth-child(2) { transition-delay: 0.1s; }
+        .slide.active .sc:nth-child(3) { transition-delay: 0.2s; }
+
+        /* ===================== HERO VIDEO ===================== */
+        #hero-video {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover; z-index: 0;
+        }
+
+        /* ===================== FLOATING LOGO ===================== */
+        #floating-logo {
+            position: fixed;
+            z-index: 300;
+            pointer-events: none;
+            filter: brightness(0) invert(1) drop-shadow(0 0 20px rgba(255,255,255,0.25));
+            transition:
+                top    0.9s cubic-bezier(0.34, 1.1, 0.64, 1),
+                left   0.9s cubic-bezier(0.34, 1.1, 0.64, 1),
+                width  0.9s cubic-bezier(0.34, 1.1, 0.64, 1),
+                opacity 0.6s ease;
+        }
+
+        /* ===================== PILL TAG ===================== */
+        .pill {
+            background: rgba(245,158,11,0.15);
+            border: 1px solid rgba(245,158,11,0.4);
+            border-radius: 999px;
+            padding: 0.25rem 0.9rem;
+            font-size: 0.82rem;
+            color: #fcd34d;
+        }
+
+        /* ===================== ICONS (SVG inline via CSS) ===================== */
+        .icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .icon svg { display: block; }
+
+        /* ===================== PARTNER CARDS ===================== */
+        @keyframes enterFromRight {
+            0%   { opacity: 0; transform: perspective(800px) rotateY(-55deg) translateX(120px) scale(0.75); filter: blur(6px); }
+            70%  { filter: blur(0); }
+            100% { opacity: 1; transform: perspective(800px) rotateY(0deg) translateX(0) scale(1); filter: blur(0); }
+        }
+        @keyframes enterFromLeft {
+            0%   { opacity: 0; transform: perspective(800px) rotateY(55deg) translateX(-120px) scale(0.75); filter: blur(6px); }
+            70%  { filter: blur(0); }
+            100% { opacity: 1; transform: perspective(800px) rotateY(0deg) translateX(0) scale(1); filter: blur(0); }
+        }
+        .partner-card {
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.4rem 1.2rem;
+            border-radius: 1.25rem;
+            cursor: default;
+            background: #ffffff;
+            border: 1px solid rgba(255,255,255,0.9);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+        .partner-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 0 0 2px rgba(245,158,11,0.5);
+        }
+        .partner-card.from-right {
+            animation: enterFromRight 0.8s cubic-bezier(0.34, 1.3, 0.64, 1) forwards;
+        }
+        .partner-card.from-left {
+            animation: enterFromLeft 0.8s cubic-bezier(0.34, 1.3, 0.64, 1) forwards;
+        }
+        .partner-card img {
+            width: 150px;
+            height: 90px;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+        .partner-card:hover img {
+            transform: scale(1.08);
+        }
+        .partner-card .partner-name {
+            font-size: 0.7rem;
+            color: #1e3a6e;
+            opacity: 0.7;
+            margin-top: 0.65rem;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Floating Logo -->
+<img id="floating-logo" src="assets/icons/option 2 png (2).png" alt="شعار قنوان">
+
+<!-- Navigation Dots -->
+<div class="nav-dots" id="navDots">
+    <div class="nav-dot active" data-label="الرئيسية"      onclick="goToSlide(0)"></div>
+    <div class="nav-dot"        data-label="نبذة تعريفية"   onclick="goToSlide(1)"></div>
+    <div class="nav-dot"        data-label="مسار التحول"    onclick="goToSlide(2)"></div>
+    <div class="nav-dot"        data-label="فلسفة الشركة"   onclick="goToSlide(3)"></div>
+    <div class="nav-dot"        data-label="الرؤية"         onclick="goToSlide(4)"></div>
+    <div class="nav-dot"        data-label="الأهداف"        onclick="goToSlide(5)"></div>
+    <div class="nav-dot"        data-label="المبادرات"      onclick="goToSlide(6)"></div>
+    <div class="nav-dot"        data-label="الشراكات"       onclick="goToSlide(7)"></div>
+    <div class="nav-dot"        data-label="شركاء النجاح"   onclick="goToSlide(8)"></div>
+</div>
+
+<div class="nav-arrow nav-arrow-up"  id="arrowUp"   onclick="prevSlide()">
+    <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M12 8l6 6H6z"/></svg>
+</div>
+<div class="nav-arrow nav-arrow-down" id="arrowDown" onclick="nextSlide()">
+    <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M12 16l-6-6h12z"/></svg>
+</div>
+
+<div class="slides-container" id="slidesContainer">
+
+    <!-- ======== SLIDE 1 — Hero ======== -->
+    <div class="slide active" id="slide-0">
+        <video id="hero-video" autoplay loop muted playsinline>
+            <source src="assets/videos/hero_bg.mp4" type="video/mp4">
+        </video>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65) 35%,transparent);z-index:1;"></div>
+        <div style="position:absolute;bottom:2.5rem;right:3rem;z-index:10;text-align:right;" class="sc">
+            <div style="height:200px;"></div>
+            <h1 style="font-size:2rem;font-weight:900;text-shadow:0 2px 10px rgba(0,0,0,0.8);margin-bottom:0.4rem;">
+                قنوان للاستثمار وإدارة المجموعات التجارية
+            </h1>
+            <p style="font-size:1.15rem;opacity:0.9;text-shadow:0 2px 8px rgba(0,0,0,0.7);">
+                انطلاق &nbsp;·&nbsp; رؤيا &nbsp;·&nbsp; نجاح &nbsp;(2025 – 2030)
+            </p>
+        </div>
+        <div class="wm">01</div>
+    </div>
+
+    <!-- ======== SLIDE 2 — نبذة تعريفية ======== -->
+    <div class="slide" id="slide-1" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+        <div style="max-width:64rem;width:100%;padding:0 2rem;">
+            <p class="slide-label sc">الشريحة 02</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;">
+                <div class="sc">
+                    <h2 style="font-size:3rem;font-weight:900;margin-bottom:1.5rem;"><span class="gold">نبذة تعريفية</span></h2>
+                    <p style="font-size:1.05rem;line-height:2;opacity:0.9;margin-bottom:1rem;">
+                        شركة قنوان للاستثمار وإدارة المجموعات التجارية امتداد لمجموعة استثمارية عريقة تديرها عائلة أبو حجر في ليبيا تأسست عام 1990 وتمثل اليوم الثمرة المتطورة لتاريخ من العطاء والبناء.
+                    </p>
+                    <p style="font-size:1.05rem;line-height:2;opacity:0.9;">
+                        كيان متكامل يجمع الخبرة الموروثة بالرؤية المستقبلية يسعى لترسيخ حضور استثماري رائد وطنيا وإقليميا.
+                    </p>
+                </div>
+                <div class="sc glass" style="padding:2rem;">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                        <div class="glass" style="padding:1.5rem;text-align:center;border-radius:1rem;">
+                            <div style="font-size:2.8rem;font-weight:900;color:#f59e0b;">35+</div>
+                            <div style="font-size:0.85rem;opacity:0.75;margin-top:0.3rem;">سنة من الخبرة</div>
+                        </div>
+                        <div class="glass" style="padding:1.5rem;text-align:center;border-radius:1rem;">
+                            <div style="font-size:2.8rem;font-weight:900;color:#f59e0b;">1990</div>
+                            <div style="font-size:0.85rem;opacity:0.75;margin-top:0.3rem;">سنة التأسيس</div>
+                        </div>
+                        <div class="glass" style="padding:1.5rem;text-align:center;border-radius:1rem;grid-column:1/-1;">
+                            <div style="font-size:2rem;font-weight:900;color:#f59e0b;">ليبيا</div>
+                            <div style="font-size:0.85rem;opacity:0.75;margin-top:0.3rem;">المقر الرئيسي</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wm">02</div>
+    </div>
+
+    <!-- ======== SLIDE 3 — مسار التحول ======== -->
+    <div class="slide" id="slide-2" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+        <div style="max-width:64rem;width:100%;padding:0 2rem;">
+            <p class="slide-label sc">الشريحة 03</p>
+            <h2 style="font-size:3rem;font-weight:900;margin-bottom:2.5rem;" class="sc"><span class="gold">مسار التحول والنجاح</span></h2>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;" class="sc">
+                <div class="glass" style="padding:1.75rem;text-align:center;border-radius:1.25rem;">
+                    <div style="font-size:1.9rem;font-weight:900;color:#f59e0b;margin-bottom:0.75rem;">1990</div>
+                    <h3 style="font-weight:700;margin-bottom:0.5rem;">التأسيس</h3>
+                    <p style="font-size:0.82rem;opacity:0.72;line-height:1.7;">انطلاق المجموعة الاستثمارية على يد عائلة أبو حجر</p>
+                </div>
+                <div class="glass" style="padding:1.75rem;text-align:center;border-radius:1.25rem;">
+                    <div style="font-size:1.9rem;font-weight:900;color:#f59e0b;margin-bottom:0.75rem;">2000</div>
+                    <h3 style="font-weight:700;margin-bottom:0.5rem;">التوسع</h3>
+                    <p style="font-size:0.82rem;opacity:0.72;line-height:1.7;">توسع الأنشطة وتنوع محفظة الاستثمارات</p>
+                </div>
+                <div class="glass" style="padding:1.75rem;text-align:center;border-radius:1.25rem;">
+                    <div style="font-size:1.9rem;font-weight:900;color:#f59e0b;margin-bottom:0.75rem;">2015</div>
+                    <h3 style="font-weight:700;margin-bottom:0.5rem;">التطور</h3>
+                    <p style="font-size:0.82rem;opacity:0.72;line-height:1.7;">إعادة الهيكلة والدخول لأسواق إقليمية جديدة</p>
+                </div>
+                <div class="glass" style="padding:1.75rem;text-align:center;border-radius:1.25rem;border-color:rgba(245,158,11,0.45);">
+                    <div style="font-size:1.9rem;font-weight:900;color:#f59e0b;margin-bottom:0.75rem;">2025</div>
+                    <h3 style="font-weight:700;margin-bottom:0.5rem;">الانطلاق</h3>
+                    <p style="font-size:0.82rem;opacity:0.72;line-height:1.7;">إطلاق قنوان بهوية مؤسسية متكاملة</p>
+                </div>
+            </div>
+            <div style="height:4px;background:linear-gradient(to left,#f59e0b,rgba(245,158,11,0.1));border-radius:999px;margin-top:1.5rem;margin-right:12.5%;width:75%;" class="sc"></div>
+        </div>
+        <div class="wm">03</div>
+    </div>
+
+    <!-- ======== SLIDE 4 — فلسفة الشركة ======== -->
+    <div class="slide" id="slide-3" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+        <div style="max-width:64rem;width:100%;padding:0 2rem;">
+            <p class="slide-label sc">الشريحة 04</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;">
+                <div>
+                    <h2 style="font-size:3rem;font-weight:900;margin-bottom:2rem;" class="sc"><span class="gold">فلسفة الشركة</span></h2>
+                    <div style="display:flex;flex-direction:column;gap:1rem;" class="sc">
+                        <div class="glass" style="padding:1.1rem 1.4rem;display:flex;gap:1rem;align-items:flex-start;border-radius:1rem;">
+                            <span class="icon" style="color:#f59e0b;font-size:1.7rem;flex-shrink:0;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-6h2v2h-2zm0-8h2v6h-2z"/></svg>
+                            </span>
+                            <div>
+                                <h3 style="font-weight:700;color:#fcd34d;margin-bottom:0.25rem;">الأصالة والتجديد</h3>
+                                <p style="font-size:0.88rem;opacity:0.8;">نحافظ على موروثنا العريق ونواكب متطلبات العصر بثقة</p>
+                            </div>
+                        </div>
+                        <div class="glass" style="padding:1.1rem 1.4rem;display:flex;gap:1rem;align-items:flex-start;border-radius:1rem;">
+                            <span class="icon" style="color:#f59e0b;flex-shrink:0;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                            </span>
+                            <div>
+                                <h3 style="font-weight:700;color:#fcd34d;margin-bottom:0.25rem;">الشراكة والبناء</h3>
+                                <p style="font-size:0.88rem;opacity:0.8;">نؤمن أن النجاح الحقيقي يبنى بالتعاون لا بالتفرد</p>
+                            </div>
+                        </div>
+                        <div class="glass" style="padding:1.1rem 1.4rem;display:flex;gap:1rem;align-items:flex-start;border-radius:1rem;">
+                            <span class="icon" style="color:#f59e0b;flex-shrink:0;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            </span>
+                            <div>
+                                <h3 style="font-weight:700;color:#fcd34d;margin-bottom:0.25rem;">الاستدامة والأثر</h3>
+                                <p style="font-size:0.88rem;opacity:0.8;">نستثمر لنترك أثرا إيجابيا مستداما في المجتمع</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sc glass" style="padding:2.5rem;text-align:center;border-radius:1.5rem;">
+                    <span class="icon" style="color:#f59e0b;margin-bottom:1rem;display:block;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/></svg>
+                    </span>
+                    <blockquote style="font-size:1.45rem;font-weight:700;line-height:1.9;color:#fde68a;">
+                        "نبني اليوم جسورا نعبر عليها نحو مستقبل أكثر ازدهارا"
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        <div class="wm">04</div>
+    </div>
+
+    <!-- ======== SLIDE 5 — الرؤية ======== -->
+    <div class="slide" id="slide-4" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+        <div style="max-width:64rem;width:100%;padding:0 2rem;text-align:center;">
+            <p class="slide-label sc">الشريحة 05</p>
+            <h2 style="font-size:3.5rem;font-weight:900;margin-bottom:0.5rem;" class="sc"><span class="gold">الرؤية</span></h2>
+            <p style="font-size:1.1rem;opacity:0.6;margin-bottom:2rem;" class="sc">2025 — 2030</p>
+            <div class="sc glass" style="padding:2.5rem;max-width:42rem;margin:0 auto 2rem;border-radius:1.5rem;">
+                <p style="font-size:1.3rem;line-height:1.9;font-weight:600;">
+                    أن تكون شركة قنوان للاستثمار <span style="color:#fcd34d;font-weight:900;">المرجع الأول</span> في إدارة المجموعات التجارية بليبيا ورافدا حقيقيا لمسيرة التنمية الوطنية والإقليمية.
+                </p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:42rem;margin:0 auto;" class="sc">
+                <div class="glass" style="padding:1.5rem;border-radius:1.25rem;">
+                    <span class="icon" style="color:#f59e0b;margin-bottom:0.5rem;display:block;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
+                    </span>
+                    <h3 style="font-weight:700;margin-bottom:0.3rem;">الريادة</h3>
+                    <p style="font-size:0.8rem;opacity:0.7;">قيادة القطاع محليا وإقليميا</p>
+                </div>
+                <div class="glass" style="padding:1.5rem;border-radius:1.25rem;">
+                    <span class="icon" style="color:#f59e0b;margin-bottom:0.5rem;display:block;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    </span>
+                    <h3 style="font-weight:700;margin-bottom:0.3rem;">التوسع</h3>
+                    <p style="font-size:0.8rem;opacity:0.7;">حضور فاعل في الأسواق الإقليمية</p>
+                </div>
+                <div class="glass" style="padding:1.5rem;border-radius:1.25rem;">
+                    <span class="icon" style="color:#f59e0b;margin-bottom:0.5rem;display:block;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 4l5 2.18V11c0 3.5-2.33 6.79-5 7.93-2.67-1.14-5-4.43-5-7.93V7.18L12 5z"/><path d="M12 7l-3.5 6.5h2.25V17h2.5v-3.5h2.25z"/></svg>
+                    </span>
+                    <h3 style="font-weight:700;margin-bottom:0.3rem;">الجودة</h3>
+                    <p style="font-size:0.8rem;opacity:0.7;">معايير عالمية في كل ما نقدمه</p>
+                </div>
+            </div>
+        </div>
+        <div class="wm">05</div>
+    </div>
+
+    <!-- ======== SLIDE 6 — الأهداف ======== -->
+    <div class="slide" id="slide-5" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+        <div style="max-width:64rem;width:100%;padding:0 2rem;">
+            <p class="slide-label sc">الشريحة 06</p>
+            <h2 style="font-size:3rem;font-weight:900;margin-bottom:2rem;" class="sc"><span class="gold">الأهداف الاستراتيجية</span></h2>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;" class="sc">
+                <div class="glass" style="padding:1.1rem 1.4rem;display:flex;gap:1rem;align-items:center;border-radius:1rem;">
+                    <div style="background:rgba(245,158,11,0.2);border-radius:50%;width:2.8rem;height:2.8rem;display:flex;align-items:center;justify-content:center;color:#f59e0b;font-weight:900;font-size:0.95rem;flex-shrink:0;">01</div>
+                    <p style="font-weight:600;font-size:0.95rem;">بناء منظومة استثمارية متكاملة ومتنوعة القطاعات</p>
+                </div>
+                <div class="glass" style="padding:1.1rem 1.4rem;display:flex;gap:1rem;align-items:center;border-radius:1rem;">
+                    <div style="background:rgba(245,158,11,0.2);border-radius:50%;width:2.8rem;height:2.8rem;display:flex;align-items:center;justify-content:center;color:#f59e0b;font-weight:900;font-size:0.95rem;flex-shrink:0;">02</div>
+                    <p style="font-weight:600;font-size:0.95rem;">تطوير الكوادر الوطنية وبناء القدرات البشرية</p>
+                </div>
+                <div class="glass" style="padding:1.1rem 1.4rem;display:flex;gap:1rem;align-items:center;border-radius:1rem;">
+                    <div style="background:rgba(245,158,11,0.2);border-radius:50%;width:2.8rem;height:2.8rem;display:flex;align-items:center;justify-content:center;color:#f59e0b;font-weight:900;font-size:0.95rem;flex-shrink:0;">03</div>
+                    <p style="font-weight:600;font-size:0.95rem;">الدخول إلى أسواق إقليمية جديدة بحلول 2027</p>
+                </div>
+                <div class="glass" style="padding:1.1rem 1.4rem;display:flex;gap:1rem;align-items:center;border-radius:1rem;">
+                    <div style="background:rgba(245,158,11,0.2);border-radius:50%;width:2.8rem;height:2.8rem;display:flex;align-items:center;justify-content:center;color:#f59e0b;font-weight:900;font-size:0.95rem;flex-shrink:0;">04</div>
+                    <p style="font-weight:600;font-size:0.95rem;">تحقيق التوازن بين الربحية والمسؤولية الاجتماعية</p>
+                </div>
+                <div class="glass" style="padding:1.1rem 1.4rem;display:flex;gap:1rem;align-items:center;border-radius:1rem;">
+                    <div style="background:rgba(245,158,11,0.2);border-radius:50%;width:2.8rem;height:2.8rem;display:flex;align-items:center;justify-content:center;color:#f59e0b;font-weight:900;font-size:0.95rem;flex-shrink:0;">05</div>
+                    <p style="font-weight:600;font-size:0.95rem;">تبني التحول الرقمي في جميع العمليات التشغيلية</p>
+                </div>
+                <div class="glass" style="padding:1.1rem 1.4rem;display:flex;gap:1rem;align-items:center;border-radius:1rem;">
+                    <div style="background:rgba(245,158,11,0.2);border-radius:50%;width:2.8rem;height:2.8rem;display:flex;align-items:center;justify-content:center;color:#f59e0b;font-weight:900;font-size:0.95rem;flex-shrink:0;">06</div>
+                    <p style="font-weight:600;font-size:0.95rem;">إنشاء صندوق لدعم المشاريع الناشئة والرياديين</p>
+                </div>
+            </div>
+        </div>
+        <div class="wm">06</div>
+    </div>
+
+    <!-- ======== SLIDE 7 — المبادرات ======== -->
+    <div class="slide" id="slide-6" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+        <div style="max-width:64rem;width:100%;padding:0 2rem;">
+            <p class="slide-label sc">الشريحة 07</p>
+            <h2 style="font-size:3rem;font-weight:900;margin-bottom:2rem;" class="sc"><span class="gold">المبادرات الوطنية والإقليمية</span></h2>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;" class="sc">
+                <div class="glass" style="padding:1.5rem;text-align:center;border-radius:1.25rem;">
+                    <span class="icon" style="color:#f59e0b;margin-bottom:0.75rem;display:block;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z"/></svg>
+                    </span>
+                    <h3 style="font-weight:700;color:#fcd34d;margin-bottom:0.5rem;">ليبيا تبني</h3>
+                    <p style="font-size:0.82rem;opacity:0.78;line-height:1.7;">دعم مشاريع البنية التحتية والتنمية المحلية في المدن الليبية</p>
+                </div>
+                <div class="glass" style="padding:1.5rem;text-align:center;border-radius:1.25rem;">
+                    <span class="icon" style="color:#f59e0b;margin-bottom:0.75rem;display:block;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20c8 0 13.41-9.56 13.41-9.56A6.004 6.004 0 0 1 17 8z"/><path d="M12.5 9.5a2 2 0 1 0-2.41 3.2 6.18 6.18 0 0 1 2.41-3.2z"/></svg>
+                    </span>
+                    <h3 style="font-weight:700;color:#fcd34d;margin-bottom:0.5rem;">الاقتصاد الأخضر</h3>
+                    <p style="font-size:0.82rem;opacity:0.78;line-height:1.7;">الاستثمار في الطاقة المتجددة والمشاريع الصديقة للبيئة</p>
+                </div>
+                <div class="glass" style="padding:1.5rem;text-align:center;border-radius:1.25rem;">
+                    <span class="icon" style="color:#f59e0b;margin-bottom:0.75rem;display:block;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+                    </span>
+                    <h3 style="font-weight:700;color:#fcd34d;margin-bottom:0.5rem;">الكفاءات الشابة</h3>
+                    <p style="font-size:0.82rem;opacity:0.78;line-height:1.7;">تأهيل وتمكين الشباب الليبي وتوفير فرص العمل</p>
+                </div>
+                <div class="glass" style="padding:1.5rem;text-align:center;border-radius:1.25rem;">
+                    <span class="icon" style="color:#f59e0b;margin-bottom:0.75rem;display:block;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    </span>
+                    <h3 style="font-weight:700;color:#fcd34d;margin-bottom:0.5rem;">الجوار الإقليمي</h3>
+                    <p style="font-size:0.82rem;opacity:0.78;line-height:1.7;">تعزيز التكامل الاقتصادي مع دول الجوار الأفريقي والعربي</p>
+                </div>
+                <div class="glass" style="padding:1.5rem;text-align:center;border-radius:1.25rem;">
+                    <span class="icon" style="color:#f59e0b;margin-bottom:0.75rem;display:block;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                    </span>
+                    <h3 style="font-weight:700;color:#fcd34d;margin-bottom:0.5rem;">الصناعة الوطنية</h3>
+                    <p style="font-size:0.82rem;opacity:0.78;line-height:1.7;">دعم وتطوير الصناعات المحلية لتحقيق الاكتفاء الذاتي</p>
+                </div>
+                <div class="glass" style="padding:1.5rem;text-align:center;border-radius:1.25rem;">
+                    <span class="icon" style="color:#f59e0b;margin-bottom:0.75rem;display:block;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+                    </span>
+                    <h3 style="font-weight:700;color:#fcd34d;margin-bottom:0.5rem;">التحول الرقمي</h3>
+                    <p style="font-size:0.82rem;opacity:0.78;line-height:1.7;">بناء بنية رقمية متكاملة لتسريع التنمية الاقتصادية</p>
+                </div>
+            </div>
+        </div>
+        <div class="wm">07</div>
+    </div>
+
+    <!-- ======== SLIDE 8 — الشراكات ======== -->
+    <div class="slide" id="slide-7" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+        <div style="max-width:64rem;width:100%;padding:0 2rem;">
+            <p class="slide-label sc">الشريحة 08</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;">
+                <div class="sc">
+                    <h2 style="font-size:3rem;font-weight:900;margin-bottom:1.5rem;"><span class="gold">الشراكات الاستراتيجية</span></h2>
+                    <p style="font-size:1rem;opacity:0.85;line-height:1.9;margin-bottom:1.5rem;">نؤمن بقوة التحالفات الاستراتيجية ركيزة للنمو المستدام ونسعى لبناء شراكات حقيقية مع كبرى المؤسسات والمنظمات محليا وإقليميا ودوليا.</p>
+                    <div class="glass" style="padding:1.25rem;border-radius:1rem;">
+                        <p style="color:#fcd34d;font-weight:700;margin-bottom:0.75rem;font-size:0.9rem;">مجالات الشراكة</p>
+                        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+                            <span class="pill">الاستثمار المشترك</span>
+                            <span class="pill">نقل التقنية</span>
+                            <span class="pill">التطوير العقاري</span>
+                            <span class="pill">التجارة الإقليمية</span>
+                            <span class="pill">الطاقة</span>
+                            <span class="pill">التعليم والتدريب</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;" class="sc">
+                    <div class="glass" style="padding:1.5rem;text-align:center;border-radius:1.25rem;">
+                        <span class="icon" style="color:#f59e0b;margin-bottom:0.5rem;display:block;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M4 10h3v7H4zm6.5 0h3v7h-3zM2 19h20v3H2zm15-9h3v7h-3zM12 1L2 6v2h20V6z"/></svg>
+                        </span>
+                        <h3 style="font-weight:700;font-size:0.9rem;">المؤسسات المالية</h3>
+                    </div>
+                    <div class="glass" style="padding:1.5rem;text-align:center;border-radius:1.25rem;">
+                        <span class="icon" style="color:#f59e0b;margin-bottom:0.5rem;display:block;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        </span>
+                        <h3 style="font-weight:700;font-size:0.9rem;">الشركات الدولية</h3>
+                    </div>
+                    <div class="glass" style="padding:1.5rem;text-align:center;border-radius:1.25rem;">
+                        <span class="icon" style="color:#f59e0b;margin-bottom:0.5rem;display:block;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z"/></svg>
+                        </span>
+                        <h3 style="font-weight:700;font-size:0.9rem;">الجهات الحكومية</h3>
+                    </div>
+                    <div class="glass" style="padding:1.5rem;text-align:center;border-radius:1.25rem;">
+                        <span class="icon" style="color:#f59e0b;margin-bottom:0.5rem;display:block;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+                        </span>
+                        <h3 style="font-weight:700;font-size:0.9rem;">المؤسسات الأكاديمية</h3>
+                    </div>
+                    <div class="glass" style="padding:1.5rem;text-align:center;border-radius:1.25rem;grid-column:1/-1;border-color:rgba(245,158,11,0.45);">
+                        <div style="color:#f59e0b;font-size:1.3rem;font-weight:900;">نرحب بشراكتك</div>
+                        <p style="font-size:0.8rem;opacity:0.7;margin-top:0.3rem;">للتواصل والاستفسار عن فرص الشراكة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wm">08</div>
+    </div>
+
+    <!-- ======== SLIDE 9 — شركاء النجاح ======== -->
+    <div class="slide" id="slide-8" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+        <div style="max-width:72rem;width:100%;padding:0 2.5rem;">
+            <div style="text-align:center;margin-bottom:1.2rem;">
+                <p class="slide-label sc">الشريحة 09</p>
+                <h2 style="font-size:2.4rem;font-weight:900;" class="sc"><span class="gold">شركاء النجاح</span></h2>
+                <p style="font-size:0.85rem;opacity:0.55;margin-top:0.25rem;" class="sc">الشركاء الاستراتيجيون</p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;" id="partners-grid">
+                <div class="partner-card" data-index="0"><img src="assets/icons/1 (2).png" alt="شريك 1"><span class="partner-name" id="pname-0">&nbsp;</span></div>
+                <div class="partner-card" data-index="1"><img src="assets/icons/2.png"      alt="شريك 2"><span class="partner-name" id="pname-1">&nbsp;</span></div>
+                <div class="partner-card" data-index="2"><img src="assets/icons/3.png"      alt="شريك 3"><span class="partner-name" id="pname-2">&nbsp;</span></div>
+                <div class="partner-card" data-index="3"><img src="assets/icons/4.png"      alt="شريك 4"><span class="partner-name" id="pname-3">&nbsp;</span></div>
+                <div class="partner-card" data-index="4"><img src="assets/icons/5.png"      alt="شريك 5"><span class="partner-name" id="pname-4">&nbsp;</span></div>
+                <div class="partner-card" data-index="5"><img src="assets/icons/6.png"      alt="شريك 6"><span class="partner-name" id="pname-5">&nbsp;</span></div>
+                <div class="partner-card" data-index="6"><img src="assets/icons/7.png"      alt="شريك 7"><span class="partner-name" id="pname-6">&nbsp;</span></div>
+                <div class="partner-card" data-index="7"><img src="assets/icons/8.png"      alt="شريك 8"><span class="partner-name" id="pname-7">&nbsp;</span></div>
+                <div class="partner-card" data-index="8"><img src="assets/icons/9.png"      alt="شريك 9"><span class="partner-name" id="pname-8">&nbsp;</span></div>
+                <div class="partner-card" data-index="9"><img src="assets/icons/10.jpeg"    alt="شريك 10"><span class="partner-name" id="pname-9">&nbsp;</span></div>
+            </div>
+        </div>
+        <div class="wm" style="opacity:0.03;">09</div>
+    </div>
+
+</div><!-- end slides-container -->
+
+<script>
+    let current = 0;
+    const total = 9;
+    const container    = document.getElementById('slidesContainer');
+    const dots         = document.querySelectorAll('.nav-dot');
+    const slides       = document.querySelectorAll('.slide');
+    const floatingLogo = document.getElementById('floating-logo');
+    let isProgrammatic = false;
+
+    const logoConfigs = [
+        // 0: Hero — أعلى الوسط، ضخم، نقطة ارتكاز
+        () => ({ top: 28, left: window.innerWidth / 2 - 210, width: 420, opacity: 1 }),
+        // 1: نبذة — أعلى اليمين خارج منطقة المحتوى
+        () => ({ top: 18, left: window.innerWidth - 120, width: 100, opacity: 0.35 }),
+        // 2: مسار التحول — أسفل اليمين
+        () => ({ top: window.innerHeight - 130, left: window.innerWidth - 120, width: 100, opacity: 0.35 }),
+        // 3: الفلسفة — أعلى اليسار
+        () => ({ top: 18, left: 18, width: 100, opacity: 0.35 }),
+        // 4: الرؤية — أسفل اليسار
+        () => ({ top: window.innerHeight - 130, left: 18, width: 100, opacity: 0.35 }),
+        // 5: الأهداف — أعلى اليمين
+        () => ({ top: 18, left: window.innerWidth - 120, width: 100, opacity: 0.35 }),
+        // 6: المبادرات — أسفل اليسار
+        () => ({ top: window.innerHeight - 130, left: 18, width: 100, opacity: 0.35 }),
+        // 7: الشراكات — أعلى اليسار
+        () => ({ top: 18, left: 18, width: 100, opacity: 0.35 }),
+        // 8: شركاء النجاح — أسفل اليمين، خافت جداً
+        () => ({ top: window.innerHeight - 100, left: window.innerWidth - 95, width: 80, opacity: 0.2 }),
+    ];
+
+    function animateLogo(i) {
+        const cfg = logoConfigs[i]();
+        floatingLogo.style.width   = cfg.width   + 'px';
+        floatingLogo.style.top     = cfg.top     + 'px';
+        floatingLogo.style.left    = cfg.left    + 'px';
+        floatingLogo.style.opacity = cfg.opacity;
+    }
+
+    function triggerPartners() {
+        const cards = document.querySelectorAll('#partners-grid .partner-card');
+        cards.forEach(c => {
+            c.classList.remove('from-right', 'from-left');
+            c.style.opacity = '0';
+            c.style.animationDelay = '';
+        });
+        setTimeout(() => {
+            cards.forEach((card, idx) => {
+                card.style.animationDelay = (idx * 0.09) + 's';
+                card.classList.add(idx % 2 === 0 ? 'from-right' : 'from-left');
+            });
+        }, 500);
+    }
+
+    function resetPartners() {
+        const cards = document.querySelectorAll('#partners-grid .partner-card');
+        cards.forEach(c => {
+            c.classList.remove('from-right', 'from-left');
+            c.style.opacity = '0';
+        });
+    }
+
+    function updateUI(i) {
+        current = i;
+        dots.forEach((d, j) => d.classList.toggle('active', j === i));
+        slides.forEach(s => s.classList.remove('active'));
+        animateLogo(i);
+        if (i !== 8) resetPartners();
+        setTimeout(() => {
+            slides[i].classList.add('active');
+            if (i === 8) triggerPartners();
+        }, 400);
+        document.getElementById('arrowUp').style.display   = i > 0        ? 'flex' : 'none';
+        document.getElementById('arrowDown').style.display = i < total - 1 ? 'flex' : 'none';
+    }
+
+    function goToSlide(i) {
+        if (i < 0 || i >= total) return;
+        isProgrammatic = true;
+        updateUI(i);
+        container.scrollTo({ top: i * window.innerHeight, behavior: 'smooth' });
+        setTimeout(() => { isProgrammatic = false; }, 900);
+    }
+
+    function nextSlide() { goToSlide(current + 1); }
+    function prevSlide() { goToSlide(current - 1); }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !isProgrammatic) {
+                const i = parseInt(entry.target.id.split('-')[1]);
+                if (!isNaN(i)) updateUI(i);
+            }
+        });
+    }, { root: container, threshold: 0.55 });
+
+    slides.forEach(s => observer.observe(s));
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); nextSlide(); }
+        if (e.key === 'ArrowUp'   || e.key === 'PageUp')   { e.preventDefault(); prevSlide(); }
+    });
+
+    updateUI(0);
+
+</script>
+</body>
+</html>
