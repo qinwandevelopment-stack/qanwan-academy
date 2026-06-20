@@ -145,12 +145,12 @@
             position: fixed;
             z-index: 300;
             pointer-events: none;
-            filter: brightness(0) invert(1) drop-shadow(0 0 14px rgba(0,0,0,0.6));
+            filter: brightness(0) invert(1) drop-shadow(0 0 20px rgba(255,255,255,0.25));
             transition:
-                top    0.75s cubic-bezier(0.4, 0, 0.2, 1),
-                left   0.75s cubic-bezier(0.4, 0, 0.2, 1),
-                width  0.75s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.5s ease;
+                top    0.9s cubic-bezier(0.34, 1.1, 0.64, 1),
+                left   0.9s cubic-bezier(0.34, 1.1, 0.64, 1),
+                width  0.9s cubic-bezier(0.34, 1.1, 0.64, 1),
+                opacity 0.6s ease;
         }
 
         /* ===================== PILL TAG ===================== */
@@ -606,15 +606,24 @@
     let isProgrammatic = false;
 
     const logoConfigs = [
-        () => ({ top: window.innerHeight - 270,  left: window.innerWidth - 580, width: 540, opacity: 1 }),
-        () => ({ top: window.innerHeight - 155,  left: window.innerWidth - 175, width: 145, opacity: 0.45 }),
-        () => ({ top: window.innerHeight - 155,  left: 20,                      width: 130, opacity: 0.45 }),
-        () => ({ top: 20,                         left: 20,                      width: 130, opacity: 0.45 }),
-        () => ({ top: window.innerHeight - 155,  left: window.innerWidth - 175, width: 145, opacity: 0.45 }),
-        () => ({ top: 20,                         left: window.innerWidth - 175, width: 145, opacity: 0.45 }),
-        () => ({ top: window.innerHeight - 155,  left: 20,                      width: 130, opacity: 0.45 }),
-        () => ({ top: 20,                         left: 20,                      width: 130, opacity: 0.45 }),
-        () => ({ top: window.innerHeight - 155,  left: window.innerWidth - 175, width: 145, opacity: 0.45 }),
+        // 0: Hero — أعلى الوسط، ضخم، نقطة ارتكاز
+        () => ({ top: 28, left: window.innerWidth / 2 - 210, width: 420, opacity: 1 }),
+        // 1: نبذة — أعلى اليمين خارج منطقة المحتوى
+        () => ({ top: 18, left: window.innerWidth - 120, width: 100, opacity: 0.35 }),
+        // 2: مسار التحول — أسفل اليمين
+        () => ({ top: window.innerHeight - 130, left: window.innerWidth - 120, width: 100, opacity: 0.35 }),
+        // 3: الفلسفة — أعلى اليسار
+        () => ({ top: 18, left: 18, width: 100, opacity: 0.35 }),
+        // 4: الرؤية — أسفل اليسار
+        () => ({ top: window.innerHeight - 130, left: 18, width: 100, opacity: 0.35 }),
+        // 5: الأهداف — أعلى اليمين
+        () => ({ top: 18, left: window.innerWidth - 120, width: 100, opacity: 0.35 }),
+        // 6: المبادرات — أسفل اليسار
+        () => ({ top: window.innerHeight - 130, left: 18, width: 100, opacity: 0.35 }),
+        // 7: الشراكات — أعلى اليسار
+        () => ({ top: 18, left: 18, width: 100, opacity: 0.35 }),
+        // 8: شركاء النجاح — أسفل اليمين، خافت جداً
+        () => ({ top: window.innerHeight - 100, left: window.innerWidth - 95, width: 80, opacity: 0.2 }),
     ];
 
     function animateLogo(i) {
