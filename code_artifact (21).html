@@ -297,11 +297,27 @@
 
     <!-- ======== SLIDE 2 — عرض تعريفي (فيديو) ======== -->
     <div class="slide" id="slide-1" style="background:#000;">
-        <video autoplay loop muted playsinline preload="auto"
+        <video id="v2-video" autoplay loop muted playsinline preload="auto"
                style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;">
             <source src="assets/videos/v2.mp4" type="video/mp4">
         </video>
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.45) 30%,transparent);z-index:1;"></div>
+
+        <!-- زر الصوت -->
+        <button id="muteBtn2" onclick="toggleMuteV2()" style="
+            position:absolute; top:1.2rem; left:1.2rem; z-index:20;
+            background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25);
+            backdrop-filter:blur(8px); border-radius:50%;
+            width:44px; height:44px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+            transition:background 0.2s; color:#fff;">
+            <svg id="iconMuted2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16.5 12A4.5 4.5 0 0 0 14 7.97V10.18l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06A8.99 8.99 0 0 0 17.73 18l2 2L21 18.73 4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+            </svg>
+            <svg id="iconSound2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </svg>
+        </button>
+
         <!-- شعار الشركة زاوية يمين سفلى -->
         <img src="assets/icons/option 2 png (2).png" alt="شعار قنوان"
              style="position:absolute;bottom:2rem;right:2rem;width:160px;z-index:10;
@@ -743,7 +759,7 @@
 
     function updateUI(i) {
         current = i;
-        // كتم الفيديو عند مغادرة شريحة Hero
+        // كتم الفيديوهات عند مغادرة شرائحها
         if (i !== 0) {
             const v = document.getElementById('hero-video');
             if (v && !v.muted) {
@@ -751,6 +767,15 @@
                 document.getElementById('iconMuted').style.display = 'block';
                 document.getElementById('iconSound').style.display = 'none';
                 document.getElementById('muteBtn').style.background = 'rgba(255,255,255,0.12)';
+            }
+        }
+        if (i !== 1) {
+            const v2 = document.getElementById('v2-video');
+            if (v2 && !v2.muted) {
+                v2.muted = true;
+                document.getElementById('iconMuted2').style.display = 'block';
+                document.getElementById('iconSound2').style.display = 'none';
+                document.getElementById('muteBtn2').style.background = 'rgba(255,255,255,0.12)';
             }
         }
         dots.forEach((d, j) => d.classList.toggle('active', j === i));
@@ -811,7 +836,14 @@
         document.getElementById('iconSound').style.display = !v.muted ? 'block' : 'none';
         btn.style.background = v.muted ? 'rgba(255,255,255,0.12)' : 'rgba(212,175,55,0.35)';
     }
-
+    function toggleMuteV2() {
+        const v  = document.getElementById('v2-video');
+        const btn = document.getElementById('muteBtn2');
+        v.muted = !v.muted;
+        document.getElementById('iconMuted2').style.display = v.muted  ? 'block' : 'none';
+        document.getElementById('iconSound2').style.display = !v.muted ? 'block' : 'none';
+        btn.style.background = v.muted ? 'rgba(255,255,255,0.12)' : 'rgba(245,158,11,0.35)';
+    }
 </script>
 </body>
 </html>
