@@ -146,11 +146,6 @@
             z-index: 300;
             pointer-events: none;
             filter: brightness(0) invert(1) drop-shadow(0 0 20px rgba(255,255,255,0.25));
-            transition:
-                top    0.9s cubic-bezier(0.34, 1.1, 0.64, 1),
-                left   0.9s cubic-bezier(0.34, 1.1, 0.64, 1),
-                width  0.9s cubic-bezier(0.34, 1.1, 0.64, 1),
-                opacity 0.6s ease;
         }
 
         /* ===================== PILL TAG ===================== */
@@ -626,12 +621,37 @@
         () => ({ top: window.innerHeight - 100, left: window.innerWidth - 95, width: 80, opacity: 0.2 }),
     ];
 
+    const springT  = 'top 0.9s cubic-bezier(0.34,1.1,0.64,1), left 0.9s cubic-bezier(0.34,1.1,0.64,1), width 0.9s cubic-bezier(0.34,1.1,0.64,1), opacity 0.6s ease';
+    const snapT    = 'top 0.22s ease-out, left 0.22s ease-out, width 0.22s ease-out, opacity 0.15s ease';
+
     function animateLogo(i) {
-        const cfg = logoConfigs[i]();
-        floatingLogo.style.width   = cfg.width   + 'px';
-        floatingLogo.style.top     = cfg.top     + 'px';
-        floatingLogo.style.left    = cfg.left    + 'px';
-        floatingLogo.style.opacity = cfg.opacity;
+        const cfg  = logoConfigs[i]();
+
+        if (i === 0) {
+            // Hero — انتقال مباشر بـ spring
+            floatingLogo.style.transition = springT;
+            floatingLogo.style.width   = cfg.width   + 'px';
+            floatingLogo.style.top     = cfg.top     + 'px';
+            floatingLogo.style.left    = cfg.left    + 'px';
+            floatingLogo.style.opacity = cfg.opacity;
+        } else {
+            // مرحلة 1: يكبر لحجم Hero أولاً (سريع)
+            const hero = logoConfigs[0]();
+            floatingLogo.style.transition = snapT;
+            floatingLogo.style.width   = hero.width   + 'px';
+            floatingLogo.style.top     = hero.top     + 'px';
+            floatingLogo.style.left    = hero.left    + 'px';
+            floatingLogo.style.opacity = 1;
+
+            // مرحلة 2: يصغر ويتموضع في زاويته (spring)
+            setTimeout(() => {
+                floatingLogo.style.transition = springT;
+                floatingLogo.style.width   = cfg.width   + 'px';
+                floatingLogo.style.top     = cfg.top     + 'px';
+                floatingLogo.style.left    = cfg.left    + 'px';
+                floatingLogo.style.opacity = cfg.opacity;
+            }, 250);
+        }
     }
 
     function triggerPartners() {
