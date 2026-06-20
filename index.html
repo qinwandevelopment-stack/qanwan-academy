@@ -192,23 +192,28 @@
             60%  { filter: blur(0); transform: translateY(-4px) scale(1.02); }
             100% { opacity:1; transform: translateY(0) scale(1); filter: blur(0); }
         }
-        /* ===== SECTOR MARQUEE ===== */
-        @keyframes sectorMarquee {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+        /* ===== SECTOR GALLERY ===== */
+        #s9-scroll-wrap {
+            flex: 1;
+            overflow-x: auto;
+            overflow-y: hidden;
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            scroll-behavior: smooth;
+            cursor: grab;
         }
+        #s9-scroll-wrap::-webkit-scrollbar { height: 4px; }
+        #s9-scroll-wrap::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius:4px; }
+        #s9-scroll-wrap::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.5); border-radius:4px; }
+        #s9-scroll-wrap.dragging { cursor: grabbing; scroll-behavior: auto; }
         #s9-marquee-track {
             display: flex;
             gap: 1rem;
-            will-change: transform;
-            cursor: grab;
-            user-select: none;
-            animation: sectorMarquee 60s linear infinite;
+            min-width: max-content;
         }
-        #s9-marquee-track.paused { animation-play-state: paused; }
-        #s9-marquee-track.dragging { cursor: grabbing; animation: none !important; }
         .marquee-img {
-            height: calc(100vh - 160px);
+            height: calc(100vh - 180px);
             width: auto;
             border-radius: 1rem;
             object-fit: cover;
@@ -224,6 +229,21 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.7), 0 0 0 2px rgba(212,175,55,0.6);
             border-color: rgba(212,175,55,0.8);
         }
+        .gallery-nav-btn {
+            flex-shrink: 0;
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            border: 2px solid rgba(212,175,55,0.6);
+            background: rgba(6,21,38,0.85);
+            backdrop-filter: blur(8px);
+            color: #D4AF37;
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+            z-index: 5;
+        }
+        .gallery-nav-btn:hover { background: rgba(212,175,55,0.25); transform: scale(1.1); }
         @keyframes borderShimmer {
             0%,100% { border-color: rgba(212,175,55,0.25); }
             50%      { border-color: rgba(212,175,55,0.55); }
@@ -817,7 +837,7 @@
     <!-- ======== SLIDE 9 — القطاعات الاستثمارية ======== -->
     <div class="slide" id="slide-9" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);position:relative;overflow:hidden;">
 
-        <!-- ألبوم الصور — شريط متحرك -->
+        <!-- ألبوم الصور — معرض أفقي -->
         <div id="s9-album" style="display:none;position:absolute;inset:0;z-index:10;flex-direction:column;background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
             <!-- شريط العنوان -->
             <div style="display:flex;align-items:center;justify-content:center;position:relative;padding:0.9rem 2rem;flex-shrink:0;border-bottom:1px solid rgba(212,175,55,0.2);">
@@ -825,11 +845,15 @@
                 <h3 id="s9-album-title" style="color:#D4AF37;font-size:1.4rem;font-weight:900;font-family:'Cairo',sans-serif;margin:0;"></h3>
                 <p id="s9-album-count" style="position:absolute;left:1.5rem;color:rgba(255,255,255,0.45);font-size:0.8rem;margin:0;"></p>
             </div>
-            <!-- الشريط المتحرك -->
-            <div id="s9-marquee-wrap" style="flex:1;overflow:hidden;display:flex;align-items:center;padding:1rem 0;">
-                <div id="s9-marquee-track"></div>
+            <!-- شريط الصور مع أزرار التنقل -->
+            <div style="display:flex;align-items:center;gap:0.75rem;padding:0 0.75rem;flex:1;min-height:0;">
+                <button class="gallery-nav-btn" id="s9-btn-right" onclick="galleryScroll(-1)" title="يمين">&#8250;</button>
+                <div id="s9-scroll-wrap">
+                    <div id="s9-marquee-track"></div>
+                </div>
+                <button class="gallery-nav-btn" id="s9-btn-left" onclick="galleryScroll(1)" title="يسار">&#8249;</button>
             </div>
-            <p style="text-align:center;color:rgba(255,255,255,0.35);font-size:0.75rem;padding:0.5rem;flex-shrink:0;">مرر فوق الصورة للإيقاف &nbsp;·&nbsp; انقر لتكبيرها</p>
+            <p style="text-align:center;color:rgba(255,255,255,0.3);font-size:0.75rem;padding:0.4rem;flex-shrink:0;">اسحب أو استخدم الأسهم للتنقل &nbsp;·&nbsp; انقر لتكبير الصورة</p>
         </div>
 
         <!-- البطاقات -->
@@ -1163,6 +1187,11 @@
 
     const rotAngles = [-4,-2.5,-1.5,0,1.5,2.5,4,-3,3,-1,1,-2,2];
 
+    function galleryScroll(dir) {
+      var wrap = document.getElementById('s9-scroll-wrap');
+      wrap.scrollBy({ left: dir * wrap.clientWidth * 0.75, behavior: 'smooth' });
+    }
+
     function openSectorAlbum(key) {
       var data = sectorData[key];
       if (!data) return;
@@ -1171,17 +1200,16 @@
       var titleEl = document.getElementById('s9-album-title');
       var countEl = document.getElementById('s9-album-count');
       var trackEl = document.getElementById('s9-marquee-track');
-      var wrapEl  = document.getElementById('s9-marquee-wrap');
+      var wrapEl  = document.getElementById('s9-scroll-wrap');
 
       titleEl.textContent = data.label;
       countEl.textContent = data.images.length + ' صورة';
       trackEl.innerHTML = '';
-      trackEl.style.transform = '';
-      trackEl.classList.remove('dragging','paused');
+      wrapEl.scrollLeft = 0;
 
-      // بناء الصور مرتين لحلقة لا نهاية
-      var allSrcs = data.images.concat(data.images);
-      allSrcs.forEach(function(src) {
+      var _isDragging = false, _dragged = false, _startX = 0, _startScroll = 0;
+
+      data.images.forEach(function(src) {
         var img = document.createElement('img');
         img.className = 'marquee-img';
         img.src = src;
@@ -1190,75 +1218,24 @@
         trackEl.appendChild(img);
       });
 
-      // ضبط سرعة animation: n ثانية = n/عدد_الصور لكل صورة
-      var dur = data.images.length * 3;
-      trackEl.style.animationDuration = dur + 's';
-
       // سحب بالماوس
-      var _isDragging = false, _dragged = false;
-      var _dragStartX = 0, _dragScrollTime = 0;
-      var _manualOffset = 0;
-
-      function getDragOffset(e) { return (e.touches ? e.touches[0].clientX : e.clientX); }
-
-      function onDragStart(e) {
+      wrapEl.onmousedown = function(e) {
         _isDragging = true; _dragged = false;
-        _dragStartX = getDragOffset(e);
-        var matrix = new DOMMatrix(window.getComputedStyle(trackEl).transform);
-        _manualOffset = matrix.m41;
-        trackEl.classList.add('dragging');
-        trackEl.style.transform = 'translateX(' + _manualOffset + 'px)';
-      }
-      function onDragMove(e) {
+        _startX = e.clientX; _startScroll = wrapEl.scrollLeft;
+        wrapEl.classList.add('dragging');
+      };
+      document.onmousemove = function(e) {
         if (!_isDragging) return;
-        e.preventDefault();
-        var dx = getDragOffset(e) - _dragStartX;
+        var dx = _startX - e.clientX;
         if (Math.abs(dx) > 4) _dragged = true;
-        trackEl.style.transform = 'translateX(' + (_manualOffset + dx) + 'px)';
-      }
-      function onDragEnd() {
+        wrapEl.scrollLeft = _startScroll + dx;
+      };
+      document.onmouseup = function() {
         if (!_isDragging) return;
         _isDragging = false;
-        trackEl.classList.remove('dragging');
-        // استئناف animation من مكانه الحالي
-        var half = trackEl.scrollWidth / 2;
-        var cur = parseFloat(trackEl.style.transform.match(/-?[\d.]+/) || [0]);
-        var pct = half > 0 ? ((-cur / half) * 100) : 0;
-        pct = ((pct % 100) + 100) % 100;
-        trackEl.style.animation = 'none';
-        trackEl.offsetHeight; // reflow
-        var dur2 = parseFloat(trackEl.style.animationDuration) || dur;
-        trackEl.style.animation = 'sectorMarquee ' + dur2 + 's linear ' + (-(pct/100)*dur2) + 's infinite';
-        trackEl.style.transform = '';
+        wrapEl.classList.remove('dragging');
         setTimeout(function(){ _dragged = false; }, 50);
-      }
-
-      trackEl.addEventListener('mousedown', onDragStart);
-      trackEl.addEventListener('touchstart', onDragStart, { passive: true });
-      document.addEventListener('mousemove', onDragMove);
-      document.addEventListener('touchmove', onDragMove, { passive: false });
-      document.addEventListener('mouseup', onDragEnd);
-      document.addEventListener('touchend', onDragEnd);
-
-      // تمرير بعجلة الماوس
-      wrapEl.addEventListener('wheel', function(e) {
-        e.preventDefault();
-        var half = trackEl.scrollWidth / 2;
-        var matrix = new DOMMatrix(window.getComputedStyle(trackEl).transform);
-        var cur = matrix.m41;
-        var newX = cur - (e.deltaX || e.deltaY) * 2;
-        trackEl.style.animation = 'none';
-        trackEl.offsetHeight;
-        trackEl.style.transform = 'translateX(' + newX + 'px)';
-        clearTimeout(wrapEl._wheelTimer);
-        wrapEl._wheelTimer = setTimeout(function(){
-          var pct = half > 0 ? ((-newX / half) * 100) : 0;
-          pct = ((pct % 100) + 100) % 100;
-          var dur2 = parseFloat(trackEl.style.animationDuration) || dur;
-          trackEl.style.animation = 'sectorMarquee ' + dur2 + 's linear ' + (-(pct/100)*dur2) + 's infinite';
-          trackEl.style.transform = '';
-        }, 400);
-      }, { passive: false });
+      };
 
       // إظهار الألبوم
       cardsEl.style.transition = 'opacity 0.3s';
@@ -1273,9 +1250,7 @@
     }
 
     function closeSectorAlbum() {
-      if (window._marqueeRaf) { cancelAnimationFrame(window._marqueeRaf); window._marqueeRaf = null; }
-      var trackEl = document.getElementById('s9-marquee-track');
-      if (trackEl) { trackEl.style.animation = ''; trackEl.style.transform = ''; }
+      document.onmousemove = null; document.onmouseup = null;
       var cardsEl = document.getElementById('s9-cards');
       var albumEl = document.getElementById('s9-album');
       albumEl.style.transition = 'opacity 0.3s';
