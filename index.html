@@ -255,6 +255,24 @@
             <source src="assets/videos/hero_bg.mp4" type="video/mp4">
         </video>
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65) 35%,transparent);z-index:1;"></div>
+
+        <!-- زر الصوت -->
+        <button id="muteBtn" onclick="toggleMute()" style="
+            position:absolute; top:1.2rem; left:1.2rem; z-index:20;
+            background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25);
+            backdrop-filter:blur(8px); border-radius:50%;
+            width:44px; height:44px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+            transition:background 0.2s, transform 0.15s; color:#fff;">
+            <!-- أيقونة كتم -->
+            <svg id="iconMuted" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16.5 12A4.5 4.5 0 0 0 14 7.97V10.18l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06A8.99 8.99 0 0 0 17.73 18l2 2L21 18.73 4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+            </svg>
+            <!-- أيقونة صوت -->
+            <svg id="iconSound" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </svg>
+        </button>
+
         <div style="position:absolute;bottom:2.5rem;right:3rem;z-index:10;text-align:right;" class="sc">
             <div style="height:200px;"></div>
             <h1 style="font-size:2rem;font-weight:900;text-shadow:0 2px 10px rgba(0,0,0,0.8);margin-bottom:0.4rem;">
@@ -727,6 +745,15 @@
         const tryPlay = () => vid.play().catch(() => {});
         vid.addEventListener('canplay', tryPlay, { once: true });
         tryPlay();
+    }
+
+    function toggleMute() {
+        const v  = document.getElementById('hero-video');
+        const btn = document.getElementById('muteBtn');
+        v.muted = !v.muted;
+        document.getElementById('iconMuted').style.display = v.muted  ? 'block' : 'none';
+        document.getElementById('iconSound').style.display = !v.muted ? 'block' : 'none';
+        btn.style.background = v.muted ? 'rgba(255,255,255,0.12)' : 'rgba(245,158,11,0.35)';
     }
 
 </script>
