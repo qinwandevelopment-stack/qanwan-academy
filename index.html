@@ -775,17 +775,17 @@
             <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;" class="sc">
 
                 <!-- التكنولوجيا والتحول الرقمي -->
-                <div class="glass sector-card has-images" onclick="openSectorAlbum('digital-transformation')" style="padding:1.2rem 0.8rem;text-align:center;border-radius:1.2rem;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;">
+                <div class="glass sector-card" style="padding:1.2rem 0.8rem;text-align:center;border-radius:1.2rem;opacity:0.5;cursor:not-allowed;">
                     <span class="material-symbols-rounded" style="font-size:48px;color:#D4AF37;">devices</span>
                     <h3 style="font-size:0.88rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;line-height:1.3;">التكنولوجيا والتحول الرقمي</h3>
-                    <span class="material-symbols-rounded" style="font-size:22px;color:#D4AF37;background:rgba(212,175,55,0.15);border:1px solid rgba(212,175,55,0.45);border-radius:50%;padding:4px;display:inline-block;line-height:1;">photo_camera</span>
+                    <span style="background:rgba(212,175,55,0.15);color:#D4AF37;font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:999px;border:1px solid rgba(212,175,55,0.35);">قريباً</span>
                 </div>
 
                 <!-- الخدمات المالية الإلكترونية -->
-                <div class="glass sector-card" style="padding:1.2rem 0.8rem;text-align:center;border-radius:1.2rem;opacity:0.5;cursor:not-allowed;">
+                <div class="glass sector-card has-images" onclick="openSectorAlbum('financial-services')" style="padding:1.2rem 0.8rem;text-align:center;border-radius:1.2rem;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;">
                     <span class="material-symbols-rounded" style="font-size:48px;color:#D4AF37;">account_balance</span>
                     <h3 style="font-size:0.88rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;line-height:1.3;">الخدمات المالية الإلكترونية</h3>
-                    <span style="background:rgba(212,175,55,0.15);color:#D4AF37;font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:999px;border:1px solid rgba(212,175,55,0.35);">قريباً</span>
+                    <span class="material-symbols-rounded" style="font-size:22px;color:#D4AF37;background:rgba(212,175,55,0.15);border:1px solid rgba(212,175,55,0.45);border-radius:50%;padding:4px;display:inline-block;line-height:1;">photo_camera</span>
                 </div>
 
                 <!-- التطوير العقاري والسياحي -->
@@ -1086,21 +1086,25 @@
       },
       'digital-transformation': {
         label: 'التحول الرقمي والحلول البرمجية',
+        images: []
+      },
+      'financial-services': {
+        label: 'الخدمات المالية الإلكترونية',
         images: [
-          'assets/sectors/digital-transformation/7lol barmga 2-01-01.png',
-          'assets/sectors/digital-transformation/7lol barmga 6-01-01.png',
-          'assets/sectors/digital-transformation/IMG-20250408-WA0022.jpg.jpeg',
-          'assets/sectors/digital-transformation/IMG-20250408-WA0025.jpg.jpeg',
-          'assets/sectors/digital-transformation/صورة واتساب بتاريخ 2025-04-09 في 00.03.45_be001dc3.jpg.jpeg',
-          'assets/sectors/digital-transformation/صورة واتساب بتاريخ 2025-04-09 في 00.04.55_6b810f80.jpg.jpeg',
-          'assets/sectors/digital-transformation/صورة واتساب بتاريخ 2025-04-09 في 00.06.38_6ca00b5e.jpg.jpeg',
-          'assets/sectors/digital-transformation/صورة واتساب بتاريخ 2025-04-09 في 00.08.44_8c7289c3.jpg.jpeg',
-          'assets/sectors/digital-transformation/صورة واتساب بتاريخ 2025-04-09 في 00.09.13_891da9d3.jpg.jpeg',
-          'assets/sectors/digital-transformation/صورة واتساب بتاريخ 2025-04-09 في 00.09.44_857ff81e.jpg.jpeg',
-          'assets/sectors/digital-transformation/صورة واتساب بتاريخ 2025-04-09 في 00.12.02_96b21749.jpg.jpeg',
-          'assets/sectors/digital-transformation/صورة واتساب بتاريخ 2025-04-09 في 02.56.28_b513d7af.jpg.jpeg',
-          'assets/sectors/digital-transformation/صورة واتساب بتاريخ 2025-04-09 في 03.06.57_b3fbb991.jpg.jpeg',
-          'assets/sectors/digital-transformation/صورة واتساب بتاريخ 2025-04-09 في 03.07.18_a75941aa.jpg.jpeg'
+          'assets/sectors/financial-services/7lol barmga 2-01-01.png',
+          'assets/sectors/financial-services/7lol barmga 6-01-01.png',
+          'assets/sectors/financial-services/IMG-20250408-WA0022.jpg.jpeg',
+          'assets/sectors/financial-services/IMG-20250408-WA0025.jpg.jpeg',
+          'assets/sectors/financial-services/صورة واتساب بتاريخ 2025-04-09 في 00.03.45_be001dc3.jpg.jpeg',
+          'assets/sectors/financial-services/صورة واتساب بتاريخ 2025-04-09 في 00.04.55_6b810f80.jpg.jpeg',
+          'assets/sectors/financial-services/صورة واتساب بتاريخ 2025-04-09 في 00.06.38_6ca00b5e.jpg.jpeg',
+          'assets/sectors/financial-services/صورة واتساب بتاريخ 2025-04-09 في 00.08.44_8c7289c3.jpg.jpeg',
+          'assets/sectors/financial-services/صورة واتساب بتاريخ 2025-04-09 في 00.09.13_891da9d3.jpg.jpeg',
+          'assets/sectors/financial-services/صورة واتساب بتاريخ 2025-04-09 في 00.09.44_857ff81e.jpg.jpeg',
+          'assets/sectors/financial-services/صورة واتساب بتاريخ 2025-04-09 في 00.12.02_96b21749.jpg.jpeg',
+          'assets/sectors/financial-services/صورة واتساب بتاريخ 2025-04-09 في 02.56.28_b513d7af.jpg.jpeg',
+          'assets/sectors/financial-services/صورة واتساب بتاريخ 2025-04-09 في 03.06.57_b3fbb991.jpg.jpeg',
+          'assets/sectors/financial-services/صورة واتساب بتاريخ 2025-04-09 في 03.07.18_a75941aa.jpg.jpeg'
         ]
       },
       'education': {
