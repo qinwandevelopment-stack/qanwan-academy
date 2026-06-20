@@ -697,6 +697,16 @@
 
     function updateUI(i) {
         current = i;
+        // كتم الفيديو عند مغادرة شريحة Hero
+        if (i !== 0) {
+            const v = document.getElementById('hero-video');
+            if (v && !v.muted) {
+                v.muted = true;
+                document.getElementById('iconMuted').style.display = 'block';
+                document.getElementById('iconSound').style.display = 'none';
+                document.getElementById('muteBtn').style.background = 'rgba(255,255,255,0.12)';
+            }
+        }
         dots.forEach((d, j) => d.classList.toggle('active', j === i));
         slides.forEach(s => s.classList.remove('active'));
         animateLogo(i);
