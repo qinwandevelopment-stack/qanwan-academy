@@ -982,6 +982,23 @@
         <div style="max-width:80rem;width:100%;padding:0 1.5rem;">
             <div style="text-align:center;margin-bottom:0.75rem;">
                 <p class="slide-label sc">الشريحة 13</p>
+                <h2 style="font-size:2rem;font-weight:900;" class="sc"><span class="gold">شركاء النجاح الاستراتيجيون</span></h2>
+                <p style="font-size:0.8rem;opacity:0.55;margin-top:0.15rem;" class="sc">شراكات استراتيجية بعيدة المدى</p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:72rem;margin:0 auto;" id="partners-grid-strategic">
+                <div class="partner-card" data-index="0"><img src="assets/partners/strategic/5.png"   alt="شريك استراتيجي 1"><span class="partner-name">&nbsp;</span></div>
+                <div class="partner-card" data-index="1"><img src="assets/partners/strategic/8.png"   alt="شريك استراتيجي 2"><span class="partner-name">&nbsp;</span></div>
+                <div class="partner-card" data-index="2"><img src="assets/partners/strategic/10.jpeg" alt="شريك استراتيجي 3"><span class="partner-name">&nbsp;</span></div>
+            </div>
+        </div>
+        <div class="wm" style="opacity:0.03;">13</div>
+    </div>
+
+    <!-- ======== شركاء النجاح المحليون ======== -->
+    <div class="slide" id="slide-13" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+        <div style="max-width:80rem;width:100%;padding:0 1.5rem;">
+            <div style="text-align:center;margin-bottom:0.75rem;">
+                <p class="slide-label sc">الشريحة 14</p>
                 <h2 style="font-size:2rem;font-weight:900;" class="sc"><span class="gold">شركاء النجاح المحليون</span></h2>
                 <p style="font-size:0.8rem;opacity:0.55;margin-top:0.15rem;" class="sc">الشركاء الاستراتيجيون المحليون</p>
             </div>
@@ -994,14 +1011,14 @@
                 <div class="partner-card" data-index="5"><img src="assets/partners/local/15.png"    alt="شريك محلي 6"><span class="partner-name">&nbsp;</span></div>
             </div>
         </div>
-        <div class="wm" style="opacity:0.03;">13</div>
+        <div class="wm">14</div>
     </div>
 
-    <!-- ======== SLIDE 11 — شركاء النجاح الإقليميون ======== -->
-    <div class="slide" id="slide-13" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+    <!-- ======== شركاء النجاح الإقليميون ======== -->
+    <div class="slide" id="slide-14" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
         <div style="max-width:80rem;width:100%;padding:0 1.5rem;">
             <div style="text-align:center;margin-bottom:0.75rem;">
-                <p class="slide-label sc">الشريحة 14</p>
+                <p class="slide-label sc">الشريحة 15</p>
                 <h2 style="font-size:2rem;font-weight:900;" class="sc"><span class="gold">شركاء النجاح الإقليميون</span></h2>
                 <p style="font-size:0.8rem;opacity:0.55;margin-top:0.15rem;" class="sc">الشركاء الاستراتيجيون على المستوى الإقليمي</p>
             </div>
@@ -1012,23 +1029,6 @@
                 <div class="partner-card" data-index="3"><img src="assets/partners/regional/7.png"  alt="شريك إقليمي 4"><span class="partner-name">&nbsp;</span></div>
                 <div class="partner-card" data-index="4"><img src="assets/partners/regional/12.png" alt="شريك إقليمي 5"><span class="partner-name">&nbsp;</span></div>
                 <div class="partner-card" data-index="5"><img src="assets/partners/regional/13.png" alt="شريك إقليمي 6"><span class="partner-name">&nbsp;</span></div>
-            </div>
-        </div>
-        <div class="wm">14</div>
-    </div>
-
-    <!-- ======== SLIDE 12 — الشركاء الاستراتيجيون ======== -->
-    <div class="slide" id="slide-14" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
-        <div style="max-width:80rem;width:100%;padding:0 1.5rem;">
-            <div style="text-align:center;margin-bottom:0.75rem;">
-                <p class="slide-label sc">الشريحة 15</p>
-                <h2 style="font-size:2rem;font-weight:900;" class="sc"><span class="gold">الشركاء الاستراتيجيون</span></h2>
-                <p style="font-size:0.8rem;opacity:0.55;margin-top:0.15rem;" class="sc">شراكات استراتيجية بعيدة المدى</p>
-            </div>
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:72rem;margin:0 auto;" id="partners-grid-strategic">
-                <div class="partner-card" data-index="0"><img src="assets/partners/strategic/5.png"   alt="شريك استراتيجي 1"><span class="partner-name">&nbsp;</span></div>
-                <div class="partner-card" data-index="1"><img src="assets/partners/strategic/8.png"   alt="شريك استراتيجي 2"><span class="partner-name">&nbsp;</span></div>
-                <div class="partner-card" data-index="2"><img src="assets/partners/strategic/10.jpeg" alt="شريك استراتيجي 3"><span class="partner-name">&nbsp;</span></div>
             </div>
         </div>
         <div class="wm">15</div>
@@ -1249,9 +1249,9 @@
     }
 
     function triggerPartners(slideIdx) {
-        const gridId = slideIdx === 13 ? 'partners-grid-regional'
-                     : slideIdx === 14 ? 'partners-grid-strategic'
-                     : 'partners-grid';
+        const gridId = slideIdx === 13 ? 'partners-grid'
+                     : slideIdx === 14 ? 'partners-grid-regional'
+                     : 'partners-grid-strategic';
         const cols = slideIdx === 14 ? 3 : 3;
         const cards = document.querySelectorAll('#' + gridId + ' .partner-card');
         cards.forEach(c => {
