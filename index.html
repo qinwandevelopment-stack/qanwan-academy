@@ -237,6 +237,25 @@
             font-weight: 700;
             letter-spacing: 0.04em;
         }
+        .sector-card.has-images:hover {
+            transform: translateY(-6px) scale(1.04);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.35), 0 0 0 2px rgba(212,175,55,0.7);
+            border-color: rgba(212,175,55,0.8);
+        }
+        .album-img-wrap { overflow:hidden; border-radius:10px; }
+        .album-img {
+            width:100%; aspect-ratio:4/3; object-fit:cover;
+            border-radius:10px; display:block; cursor:zoom-in;
+            opacity:0; transform:translateY(24px) scale(0.92);
+            transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22,1,0.36,1),
+                        box-shadow 0.3s ease;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.45);
+            border: 1.5px solid rgba(212,175,55,0.2);
+        }
+        .album-img.visible {
+            opacity:1; transform:translateY(0) scale(1) rotate(var(--rot,0deg));
+        }
+        .album-img:hover { box-shadow:0 10px 35px rgba(0,0,0,0.6); transform:scale(1.03) rotate(0deg) !important; }
     </style>
 </head>
 <body>
@@ -255,12 +274,13 @@
     <div class="nav-dot"        data-label="فلسفة المؤسسة"       onclick="goToSlide(6)"></div>
     <div class="nav-dot"        data-label="الأهداف"             onclick="goToSlide(7)"></div>
     <div class="nav-dot"        data-label="المحافظ الاستثمارية" onclick="goToSlide(8)"></div>
-    <div class="nav-dot"        data-label="مبادرة وطنية"        onclick="goToSlide(9)"></div>
-    <div class="nav-dot"        data-label="مبادرة إقليمية"      onclick="goToSlide(10)"></div>
-    <div class="nav-dot"        data-label="الشراكات"            onclick="goToSlide(11)"></div>
-    <div class="nav-dot"        data-label="شركاء محليون"        onclick="goToSlide(12)"></div>
-    <div class="nav-dot"        data-label="شركاء إقليميون"      onclick="goToSlide(13)"></div>
-    <div class="nav-dot"        data-label="شركاء استراتيجيون"   onclick="goToSlide(14)"></div>
+    <div class="nav-dot"        data-label="القطاعات الاستثمارية" onclick="goToSlide(9)"></div>
+    <div class="nav-dot"        data-label="مبادرة وطنية"        onclick="goToSlide(10)"></div>
+    <div class="nav-dot"        data-label="مبادرة إقليمية"      onclick="goToSlide(11)"></div>
+    <div class="nav-dot"        data-label="الشراكات"            onclick="goToSlide(12)"></div>
+    <div class="nav-dot"        data-label="شركاء محليون"        onclick="goToSlide(13)"></div>
+    <div class="nav-dot"        data-label="شركاء إقليميون"      onclick="goToSlide(14)"></div>
+    <div class="nav-dot"        data-label="شركاء استراتيجيون"   onclick="goToSlide(15)"></div>
 </div>
 
 <div class="nav-arrow nav-arrow-up"  id="arrowUp"   onclick="prevSlide()">
@@ -709,10 +729,67 @@
         <div class="wm">09</div>
     </div>
 
-    <!-- ======== SLIDE 13 — مبادرة قنوان الوطنية للتحول الرقمي ======== -->
+    <!-- ======== SLIDE 9 — القطاعات الاستثمارية ======== -->
     <div class="slide" id="slide-9" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+        <div style="max-width:72rem;width:100%;padding:0 2rem;">
+            <div style="text-align:center;margin-bottom:1.5rem;">
+                <p class="slide-label sc">الشريحة 10</p>
+                <h2 style="font-size:2.6rem;font-weight:900;" class="sc"><span class="gold">القطاعات الاستثمارية</span></h2>
+                <p style="font-size:0.9rem;opacity:0.6;margin-top:0.3rem;" class="sc">انقر على أي قطاع لمشاهدة صوره</p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;" class="sc">
+
+                <!-- التحول الرقمي -->
+                <div class="glass sector-card" style="padding:1.6rem;text-align:center;border-radius:1.4rem;opacity:0.5;cursor:not-allowed;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.8rem;"><path d="M20 3H4v10c0 1.1.9 2 2 2h3v2H7v2h10v-2h-2v-2h3c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 10H6V5h14v8z"/><path d="M11.5 12.5h1v1h-1zm-3 0h1v1h-1zm6 0h1v1h-1z"/></svg>
+                    <h3 style="font-size:1rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;">التحول الرقمي</h3>
+                    <span style="background:rgba(212,175,55,0.15);color:#D4AF37;font-size:0.72rem;padding:0.2rem 0.7rem;border-radius:999px;border:1px solid rgba(212,175,55,0.35);">قريباً</span>
+                </div>
+
+                <!-- تجارة الغذاء -->
+                <div class="glass sector-card has-images" onclick="openSectorAlbum('food-trade')" style="padding:1.6rem;text-align:center;border-radius:1.4rem;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.8rem;"><path d="M18.06 22.99h1.66c.84 0 1.53-.64 1.63-1.46L23 5.05h-5V1h-1.97v4.05h-4.97l.3 2.34c1.71.47 3.31 1.32 4.27 2.26 1.44 1.42 2.43 2.89 2.43 5.29v8.05zM1 21.99V21h15.03v.99c0 .55-.45 1-1.01 1H2.01c-.56 0-1.01-.45-1.01-1zm15.03-7c0-8-15.03-8-15.03 0h15.03zM1.02 17h15v2H1.02z"/></svg>
+                    <h3 style="font-size:1rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;">تجارة الغذاء والسلع</h3>
+                    <span style="background:rgba(212,175,55,0.2);color:#F0D060;font-size:0.72rem;padding:0.2rem 0.7rem;border-radius:999px;border:1px solid rgba(212,175,55,0.5);">4 صور ←</span>
+                </div>
+
+                <!-- البنية التحتية -->
+                <div class="glass sector-card has-images" onclick="openSectorAlbum('infrastructure')" style="padding:1.6rem;text-align:center;border-radius:1.4rem;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.8rem;"><path d="M13 2.05V4.07c3.94.49 7 3.85 7 7.93s-3.05 7.44-7 7.93v2.02c5.05-.5 9-4.76 9-9.95S18.05 2.55 13 2.05zM11 2.06C7.06 2.56 4 5.92 4 10s3.05 7.44 7 7.93V19.95C5.96 19.44 2 15.18 2 10c0-5.18 3.96-9.44 9-9.94v2.0zm-1.14 7.43l-1.06.71 2.58 3.86 1.44-.96-2.96-3.61zm3.86-.72l1.07.71-2.58 3.86-1.44-.96 2.95-3.61z"/></svg>
+                    <h3 style="font-size:1rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;">البنية التحتية</h3>
+                    <span style="background:rgba(212,175,55,0.2);color:#F0D060;font-size:0.72rem;padding:0.2rem 0.7rem;border-radius:999px;border:1px solid rgba(212,175,55,0.5);">11 صورة ←</span>
+                </div>
+
+                <!-- تجارة المجوهرات -->
+                <div class="glass sector-card" style="padding:1.6rem;text-align:center;border-radius:1.4rem;opacity:0.5;cursor:not-allowed;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.8rem;"><path d="M16 3H8L2 9l10 13L22 9l-6-6zm-1.4 2l1.5 2.5h-8.2L9.4 5h5.2zM4.5 9h3.6l2.5 8.5L4.5 9zm11.4 0h3.6l-6.1 8.5L15.9 9zm-1.5 0l-2.4 8-2.4-8h4.8z"/></svg>
+                    <h3 style="font-size:1rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;">تجارة المجوهرات والمعادن</h3>
+                    <span style="background:rgba(212,175,55,0.15);color:#D4AF37;font-size:0.72rem;padding:0.2rem 0.7rem;border-radius:999px;border:1px solid rgba(212,175,55,0.35);">قريباً</span>
+                </div>
+
+                <!-- التكنولوجيا -->
+                <div class="glass sector-card" style="padding:1.6rem;text-align:center;border-radius:1.4rem;opacity:0.5;cursor:not-allowed;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.8rem;"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                    <h3 style="font-size:1rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;">التكنولوجيا والابتكار</h3>
+                    <span style="background:rgba(212,175,55,0.15);color:#D4AF37;font-size:0.72rem;padding:0.2rem 0.7rem;border-radius:999px;border:1px solid rgba(212,175,55,0.35);">قريباً</span>
+                </div>
+
+                <!-- الاستثمار السياحي -->
+                <div class="glass sector-card has-images" onclick="openSectorAlbum('tourism-investment')" style="padding:1.6rem;text-align:center;border-radius:1.4rem;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="#D4AF37" style="margin-bottom:0.8rem;"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/></svg>
+                    <h3 style="font-size:1rem;font-weight:800;color:#F0D060;margin-bottom:0.4rem;">الاستثمار السياحي</h3>
+                    <span style="background:rgba(212,175,55,0.2);color:#F0D060;font-size:0.72rem;padding:0.2rem 0.7rem;border-radius:999px;border:1px solid rgba(212,175,55,0.5);">30 صورة ←</span>
+                </div>
+
+            </div>
+        </div>
+        <div class="wm">10</div>
+    </div>
+
+    <!-- ======== SLIDE 13 — مبادرة قنوان الوطنية للتحول الرقمي ======== -->
+    <div class="slide" id="slide-10" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
         <div style="max-width:70rem;width:100%;padding:0 2rem;">
-            <p class="slide-label sc">الشريحة 10</p>
+            <p class="slide-label sc">الشريحة 11</p>
             <h2 style="font-size:2rem;font-weight:900;margin-bottom:0.3rem;" class="sc"><span class="gold">مبادرة قنوان الوطنية للتحول الرقمي</span></h2>
             <p style="font-size:0.85rem;opacity:0.6;margin-bottom:1.2rem;" class="sc">مبادرة وطنية شاملة لتحويل بيئة الأعمال في ليبيا نحو الاقتصاد الرقمي</p>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
@@ -760,13 +837,13 @@
                 </div>
             </div>
         </div>
-        <div class="wm">10</div>
+        <div class="wm">11</div>
     </div>
 
     <!-- ======== SLIDE 14 — مبادرة قنوان الإقليمية ======== -->
-    <div class="slide" id="slide-10" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+    <div class="slide" id="slide-11" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
         <div style="max-width:70rem;width:100%;padding:0 2rem;">
-            <p class="slide-label sc">الشريحة 11</p>
+            <p class="slide-label sc">الشريحة 12</p>
             <h2 style="font-size:2rem;font-weight:900;margin-bottom:0.3rem;" class="sc"><span class="gold">مبادرة قنوان الإقليمية</span></h2>
             <p style="font-size:0.85rem;opacity:0.6;margin-bottom:1.2rem;" class="sc">بناء جسور التعاون الاقتصادي وفتح آفاق الشراكة الإقليمية</p>
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;" class="sc">
@@ -799,13 +876,13 @@
                 </div>
             </div>
         </div>
-        <div class="wm">11</div>
+        <div class="wm">12</div>
     </div>
 
     <!-- ======== SLIDE 8 — الشراكات ======== -->
-    <div class="slide" id="slide-11" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+    <div class="slide" id="slide-12" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
         <div style="max-width:64rem;width:100%;padding:0 2rem;">
-            <p class="slide-label sc">الشريحة 12</p>
+            <p class="slide-label sc">الشريحة 13</p>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;">
                 <div class="sc">
                     <h2 style="font-size:3rem;font-weight:900;margin-bottom:1.5rem;"><span class="gold">الشراكات الاستراتيجية</span></h2>
@@ -854,14 +931,14 @@
                 </div>
             </div>
         </div>
-        <div class="wm">12</div>
+        <div class="wm">13</div>
     </div>
 
     <!-- ======== SLIDE 9 — شركاء النجاح ======== -->
-    <div class="slide" id="slide-12" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+    <div class="slide" id="slide-13" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
         <div style="max-width:80rem;width:100%;padding:0 1.5rem;">
             <div style="text-align:center;margin-bottom:0.75rem;">
-                <p class="slide-label sc">الشريحة 13</p>
+                <p class="slide-label sc">الشريحة 14</p>
                 <h2 style="font-size:2rem;font-weight:900;" class="sc"><span class="gold">شركاء النجاح المحليون</span></h2>
                 <p style="font-size:0.8rem;opacity:0.55;margin-top:0.15rem;" class="sc">الشركاء الاستراتيجيون المحليون</p>
             </div>
@@ -874,14 +951,14 @@
                 <div class="partner-card" data-index="5"><img src="assets/partners/local/15.png"    alt="شريك محلي 6"><span class="partner-name">&nbsp;</span></div>
             </div>
         </div>
-        <div class="wm" style="opacity:0.03;">13</div>
+        <div class="wm" style="opacity:0.03;">14</div>
     </div>
 
     <!-- ======== SLIDE 11 — شركاء النجاح الإقليميون ======== -->
-    <div class="slide" id="slide-13" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+    <div class="slide" id="slide-14" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
         <div style="max-width:80rem;width:100%;padding:0 1.5rem;">
             <div style="text-align:center;margin-bottom:0.75rem;">
-                <p class="slide-label sc">الشريحة 14</p>
+                <p class="slide-label sc">الشريحة 15</p>
                 <h2 style="font-size:2rem;font-weight:900;" class="sc"><span class="gold">شركاء النجاح الإقليميون</span></h2>
                 <p style="font-size:0.8rem;opacity:0.55;margin-top:0.15rem;" class="sc">الشركاء الاستراتيجيون على المستوى الإقليمي</p>
             </div>
@@ -894,14 +971,14 @@
                 <div class="partner-card" data-index="5"><img src="assets/partners/regional/13.png" alt="شريك إقليمي 6"><span class="partner-name">&nbsp;</span></div>
             </div>
         </div>
-        <div class="wm">14</div>
+        <div class="wm">15</div>
     </div>
 
     <!-- ======== SLIDE 12 — الشركاء الاستراتيجيون ======== -->
-    <div class="slide" id="slide-14" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
+    <div class="slide" id="slide-15" style="background:linear-gradient(135deg,#061526 0%,#0d2d5e 60%,#1a4a9e 100%);">
         <div style="max-width:80rem;width:100%;padding:0 1.5rem;">
             <div style="text-align:center;margin-bottom:0.75rem;">
-                <p class="slide-label sc">الشريحة 15</p>
+                <p class="slide-label sc">الشريحة 16</p>
                 <h2 style="font-size:2rem;font-weight:900;" class="sc"><span class="gold">الشركاء الاستراتيجيون</span></h2>
                 <p style="font-size:0.8rem;opacity:0.55;margin-top:0.15rem;" class="sc">شراكات استراتيجية بعيدة المدى</p>
             </div>
@@ -911,14 +988,123 @@
                 <div class="partner-card" data-index="2"><img src="assets/partners/strategic/10.jpeg" alt="شريك استراتيجي 3"><span class="partner-name">&nbsp;</span></div>
             </div>
         </div>
-        <div class="wm">15</div>
+        <div class="wm">16</div>
     </div>
 
 </div><!-- end slides-container -->
 
 <script>
+    /* ======== SECTOR ALBUM DATA ======== */
+    const sectorData = {
+      'food-trade': {
+        label: 'تجارة الغذاء والسلع',
+        images: [
+          'assets/sectors/food-trade/Gemini_Generated_Image_ (1).png',
+          'assets/sectors/food-trade/Gemini_Generated_Image_ (2).png',
+          'assets/sectors/food-trade/Gemini_Generated_Image_ (3).png',
+          'assets/sectors/food-trade/Gemini_Generated_Image_ (4).png'
+        ]
+      },
+      'infrastructure': {
+        label: 'البنية التحتية والمشاريع',
+        images: [
+          'assets/sectors/infrastructure/IMG-20250116-WA0007.jpg.jpeg',
+          'assets/sectors/infrastructure/IMG-20250116-WA0030.jpg (1).jpeg',
+          'assets/sectors/infrastructure/IMG-20250116-WA0030.jpg.jpeg',
+          'assets/sectors/infrastructure/IMG-20250116-WA0034.jpg.jpeg',
+          'assets/sectors/infrastructure/IMG-20250116-WA0035.jpg.jpeg',
+          'assets/sectors/infrastructure/IMG-20250116-WA0036.jpg.jpeg',
+          'assets/sectors/infrastructure/IMG-20250116-WA0046.jpg.jpeg',
+          'assets/sectors/infrastructure/IMG-20250116-WA0059.jpg.jpeg',
+          'assets/sectors/infrastructure/\u0635\u0648\u0631\u0629 \u0648\u0627\u062a\u0633\u0627\u0628 \u0628\u062a\u0627\u0631\u064a\u062e 2025-01-16 \u0641\u064a 15.44.39_fa5fa2fa.jpg.jpeg',
+          'assets/sectors/infrastructure/\u0635\u0648\u0631\u0629 \u0648\u0627\u062a\u0633\u0627\u0628 \u0628\u062a\u0627\u0631\u064a\u062e 2025-01-16 \u0641\u064a 15.54.40_5bb10ae5.jpg.jpeg',
+          'assets/sectors/infrastructure/\u0635\u0648\u0631\u0629 \u0648\u0627\u062a\u0633\u0627\u0628 \u0628\u062a\u0627\u0631\u064a\u062e 2025-01-16 \u0641\u064a 16.01.26_dbae5840.jpg.jpeg'
+        ]
+      },
+      'tourism-investment': {
+        label: 'الاستثمار السياحي',
+        images: [
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.13 PM.jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.13 PM (1).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.14 PM.jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.14 PM (1).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.14 PM (2).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.14 PM (3).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.14 PM (4).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.15 PM.jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.15 PM (1).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.15 PM (2).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.15 PM (3).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.15 PM (4).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.15 PM (5).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.15 PM (6).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.16 PM.jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.16 PM (1).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.16 PM (2).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.16 PM (3).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.16 PM (4).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.16 PM (5).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.16 PM (6).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.17 PM.jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.17 PM (1).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.17 PM (2).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.17 PM (3).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.17 PM (4).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.17 PM (5).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.17 PM (6).jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.18 PM.jpeg',
+          'assets/sectors/tourism-investment/WhatsApp Image 2026-06-20 at 1.04.18 PM (1).jpeg'
+        ]
+      }
+    };
+
+    const rotAngles = [-4,-2.5,-1.5,0,1.5,2.5,4,-3,3,-1,1,-2,2];
+
+    function openSectorAlbum(key) {
+      var data = sectorData[key];
+      if (!data) return;
+      document.getElementById('albumTitle').textContent = data.label;
+      var grid = document.getElementById('albumGrid');
+      grid.innerHTML = '';
+      data.images.forEach(function(src, i) {
+        var wrap = document.createElement('div');
+        wrap.className = 'album-img-wrap';
+        var rot = rotAngles[i % rotAngles.length];
+        wrap.style.setProperty('--rot', rot + 'deg');
+        var img = document.createElement('img');
+        img.className = 'album-img';
+        img.src = src;
+        img.alt = data.label + ' - صورة ' + (i+1);
+        img.onclick = function(e){ e.stopPropagation(); openLightbox(src); };
+        wrap.appendChild(img);
+        grid.appendChild(wrap);
+        setTimeout(function(){ img.classList.add('visible'); }, 60 + i * 70);
+      });
+      var overlay = document.getElementById('sectorAlbum');
+      overlay.style.display = 'block';
+      overlay.scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAlbum() {
+      document.getElementById('sectorAlbum').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    function closeAlbumOutside(e) {
+      if (e.target === document.getElementById('sectorAlbum')) closeAlbum();
+    }
+
+    function openLightbox(src) {
+      var lb = document.getElementById('imgLightbox');
+      document.getElementById('lightboxImg').src = src;
+      lb.style.display = 'block';
+    }
+
+    /* ======== END SECTOR ALBUM ======== */
+
     let current = 0;
-    const total = 15;
+    const total = 16;
     const container    = document.getElementById('slidesContainer');
     const dots         = document.querySelectorAll('.nav-dot');
     const slides       = document.querySelectorAll('.slide');
@@ -935,12 +1121,13 @@
         () => ({ top: 18, left: 18, width: 100, opacity: 0.35 }),                                 // 6 فلسفة
         () => ({ top: 18, left: window.innerWidth - 120, width: 100, opacity: 0.35 }),            // 7 أهداف
         () => ({ top: window.innerHeight - 130, left: window.innerWidth - 120, width: 100, opacity: 0.35 }), // 8 قطاعات
-        () => ({ top: 18, left: window.innerWidth - 120, width: 100, opacity: 0.35 }),            // 9 مبادرة وطنية
-        () => ({ top: 18, left: 18, width: 100, opacity: 0.35 }),                                 // 10 مبادرة إقليمية
-        () => ({ top: 18, left: 18, width: 100, opacity: 0.35 }),                                 // 11 شراكات
-        () => ({ top: window.innerHeight - 100, left: window.innerWidth - 95, width: 80, opacity: 0.2 }), // 12 محليون
-        () => ({ top: window.innerHeight - 100, left: window.innerWidth - 95, width: 80, opacity: 0.2 }), // 13 إقليميون
-        () => ({ top: window.innerHeight - 100, left: window.innerWidth - 95, width: 80, opacity: 0.2 }), // 14 استراتيجيون
+        () => ({ top: 18, left: window.innerWidth - 120, width: 100, opacity: 0.35 }),            // 9 قطاعات (new)
+        () => ({ top: 18, left: window.innerWidth - 120, width: 100, opacity: 0.35 }),            // 10 مبادرة وطنية
+        () => ({ top: 18, left: 18, width: 100, opacity: 0.35 }),                                 // 11 مبادرة إقليمية
+        () => ({ top: 18, left: 18, width: 100, opacity: 0.35 }),                                 // 12 شراكات
+        () => ({ top: window.innerHeight - 100, left: window.innerWidth - 95, width: 80, opacity: 0.2 }), // 13 محليون
+        () => ({ top: window.innerHeight - 100, left: window.innerWidth - 95, width: 80, opacity: 0.2 }), // 14 إقليميون
+        () => ({ top: window.innerHeight - 100, left: window.innerWidth - 95, width: 80, opacity: 0.2 }), // 15 استراتيجيون
     ];
 
     const springT  = 'top 1.4s cubic-bezier(0.16,1,0.3,1), left 1.4s cubic-bezier(0.16,1,0.3,1), width 1.4s cubic-bezier(0.16,1,0.3,1), opacity 1s ease';
@@ -977,8 +1164,8 @@
     }
 
     function triggerPartners(slideIdx) {
-        const gridId = slideIdx === 13 ? 'partners-grid-regional'
-                     : slideIdx === 14 ? 'partners-grid-strategic'
+        const gridId = slideIdx === 14 ? 'partners-grid-regional'
+                     : slideIdx === 15 ? 'partners-grid-strategic'
                      : 'partners-grid';
         const cols = slideIdx === 14 ? 3 : 3;
         const cards = document.querySelectorAll('#' + gridId + ' .partner-card');
@@ -1031,10 +1218,10 @@
         dots.forEach((d, j) => d.classList.toggle('active', j === i));
         slides.forEach(s => s.classList.remove('active'));
         animateLogo(i);
-        if (i !== 12 && i !== 13 && i !== 14) resetPartners();
+        if (i !== 13 && i !== 14 && i !== 15) resetPartners();
         setTimeout(() => {
             slides[i].classList.add('active');
-            if (i === 12 || i === 13 || i === 14) triggerPartners(i);
+            if (i === 13 || i === 14 || i === 15) triggerPartners(i);
         }, 400);
         document.getElementById('arrowUp').style.display   = i > 0        ? 'flex' : 'none';
         document.getElementById('arrowDown').style.display = i < total - 1 ? 'flex' : 'none';
@@ -1102,5 +1289,21 @@
         btn.style.background = v.muted ? 'rgba(255,255,255,0.12)' : 'rgba(245,158,11,0.35)';
     }
 </script>
+
+<!-- ======== SECTOR ALBUM OVERLAY ======== -->
+<div id="sectorAlbum" onclick="closeAlbumOutside(event)" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(4,12,28,0.93);overflow-y:auto;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);">
+    <div style="position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:center;padding:1.2rem 1rem;background:linear-gradient(to bottom,rgba(4,12,28,0.98),transparent);gap:1rem;">
+        <button onclick="closeAlbum()" title="إغلاق" style="position:absolute;left:1.2rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.1);border:1px solid rgba(212,175,55,0.4);border-radius:50%;width:44px;height:44px;cursor:pointer;color:#fff;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:background 0.2s;" onmouseover="this.style.background='rgba(212,175,55,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">✕</button>
+        <h2 id="albumTitle" style="color:#D4AF37;font-size:1.7rem;font-weight:900;font-family:'Cairo',sans-serif;text-align:center;margin:0;"></h2>
+    </div>
+    <div id="albumGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;padding:0 1.5rem 3rem;max-width:1100px;margin:0 auto;"></div>
+</div>
+
+<!-- ======== IMAGE LIGHTBOX ======== -->
+<div id="imgLightbox" onclick="this.style.display='none'" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,0.97);cursor:zoom-out;display:none;">
+    <img id="lightboxImg" alt="صورة مكبرة" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-width:94vw;max-height:92vh;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,0.8);border:1px solid rgba(212,175,55,0.3);">
+    <button onclick="event.stopPropagation();document.getElementById('imgLightbox').style.display='none'" style="position:absolute;top:1rem;left:1rem;background:rgba(255,255,255,0.12);border:1px solid rgba(212,175,55,0.35);border-radius:50%;width:44px;height:44px;cursor:pointer;color:#fff;font-size:1.2rem;display:flex;align-items:center;justify-content:center;">✕</button>
+</div>
+
 </body>
 </html>
