@@ -1103,6 +1103,29 @@
         <div class="wm">15</div>
     </div>
 
+    <!-- SLIDE 15 — الشريحة الختامية -->
+    <div class="slide" id="slide-15" style="background:linear-gradient(160deg,#020d1c 0%,#061828 60%,#0a2240 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+        <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:1.4rem;padding:2rem 1rem;">
+
+            <!-- شعار -->
+            <div style="background:#fff;border-radius:1.4rem;padding:1.2rem 2rem;box-shadow:0 8px 40px rgba(0,0,0,0.45);">
+                <img src="assets/icons/logo-trimmed.png" style="width:clamp(200px,28vw,380px);height:auto;display:block;" alt="شعار قنوان">
+            </div>
+
+            <!-- فاصل ذهبي -->
+            <div style="width:clamp(100px,18vw,220px);height:2px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);"></div>
+
+            <!-- نص الشكر -->
+            <h1 style="font-size:clamp(1.6rem,3vw,2.6rem);font-weight:900;color:#fff;margin:0;">شكراً لحسن استماعكم</h1>
+            <p style="font-size:clamp(0.95rem,1.6vw,1.25rem);color:#c9a84c;font-weight:600;margin:0;">مؤسسة قنوان / للاستثمار وإدارة المجموعات التجارية</p>
+
+            <!-- فاصل ذهبي ثاني -->
+            <div style="width:clamp(60px,10vw,130px);height:1px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);"></div>
+
+        </div>
+        <div class="wm">16</div>
+    </div>
+
 </div><!-- end slides-container -->
 
 <script>
@@ -1348,7 +1371,7 @@
     /* ======== END SECTOR ALBUM ======== */
 
     let current = 0;
-    const total = 15;
+    const total = 16;
     const container    = document.getElementById('slidesContainer');
     const dots         = document.querySelectorAll('.nav-dot');
     const slides       = document.querySelectorAll('.slide');
@@ -1371,6 +1394,7 @@
         () => ({ top: window.innerHeight - 100, left: window.innerWidth - 95, width: 80, opacity: 0.2 }), // 12 محليون
         () => ({ top: window.innerHeight - 100, left: window.innerWidth - 95, width: 80, opacity: 0.2 }), // 13 إقليميون
         () => ({ top: window.innerHeight - 100, left: window.innerWidth - 95, width: 80, opacity: 0.2 }), // 14 استراتيجيون
+        () => ({ top: window.innerHeight - 100, left: window.innerWidth - 95, width: 80, opacity: 0    }), // 15 ختامية
     ];
 
     const springT  = 'top 1.4s cubic-bezier(0.16,1,0.3,1), left 1.4s cubic-bezier(0.16,1,0.3,1), width 1.4s cubic-bezier(0.16,1,0.3,1), opacity 1s ease';
