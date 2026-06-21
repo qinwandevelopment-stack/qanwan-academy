@@ -1104,23 +1104,53 @@
     </div>
 
     <!-- SLIDE 15 — الشريحة الختامية -->
-    <div class="slide" id="slide-15" style="background:linear-gradient(160deg,#020d1c 0%,#061828 60%,#0a2240 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;">
-        <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:1.4rem;padding:2rem 1rem;">
+    <div class="slide" id="slide-15" style="position:relative;overflow:hidden;">
 
-            <!-- شعار -->
-            <div style="background:#fff;border-radius:1.4rem;padding:1.2rem 2rem;box-shadow:0 8px 40px rgba(0,0,0,0.45);">
-                <img src="assets/icons/logo-trimmed.png" style="width:clamp(200px,28vw,380px);height:auto;display:block;" alt="شعار قنوان">
+        <!-- طبقة 1: خلفية الصور -->
+        <div id="closing-mosaic" style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(6,1fr);gap:3px;z-index:0;"></div>
+
+        <!-- طبقة 2: أوفرلاي أزرق -->
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(2,10,30,0.82) 0%,rgba(4,20,55,0.78) 50%,rgba(2,10,30,0.85) 100%);z-index:1;"></div>
+
+        <!-- طبقة 3: المحتوى -->
+        <div style="position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.75rem;padding:1rem 2rem;">
+
+            <!-- شعار المؤسسة -->
+            <div style="background:#fff;border-radius:1.2rem;padding:0.8rem 1.8rem;box-shadow:0 8px 48px rgba(0,0,0,0.6),0 0 0 2px rgba(201,168,76,0.5);">
+                <img src="assets/icons/logo-trimmed.png" style="width:clamp(180px,22vw,320px);height:auto;display:block;" alt="شعار قنوان">
             </div>
 
-            <!-- فاصل ذهبي -->
-            <div style="width:clamp(100px,18vw,220px);height:2px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);"></div>
+            <!-- فاصل -->
+            <div style="width:clamp(100px,16vw,200px);height:2px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);"></div>
 
-            <!-- نص الشكر -->
-            <h1 style="font-size:clamp(1.6rem,3vw,2.6rem);font-weight:900;color:#fff;margin:0;">نشكر حسن اطلاعكم</h1>
-            <p style="font-size:clamp(0.95rem,1.6vw,1.25rem);color:#c9a84c;font-weight:600;margin:0;">مؤسسة قنوان للاستثمار وإدارة المجموعات التجارية</p>
+            <!-- نص ختامي -->
+            <h1 style="font-size:clamp(1.4rem,2.5vw,2.2rem);font-weight:900;color:#fff;margin:0;text-shadow:0 2px 16px rgba(0,0,0,0.7);">نشكر حسن اطلاعكم</h1>
+            <p style="font-size:clamp(0.85rem,1.4vw,1.1rem);color:#c9a84c;font-weight:600;margin:0;">مؤسسة قنوان للاستثمار وإدارة المجموعات التجارية</p>
 
-            <!-- فاصل ذهبي ثاني -->
-            <div style="width:clamp(60px,10vw,130px);height:1px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);"></div>
+            <!-- فاصل -->
+            <div style="width:clamp(60px,10vw,120px);height:1px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);"></div>
+
+            <!-- شعارات الشركاء -->
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:0.5rem;max-width:76rem;">
+                <!-- strategic -->
+                <div style="background:rgba(255,255,255,0.95);border-radius:0.6rem;padding:0.3rem 0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.3);"><img src="assets/partners/strategic/10.jpeg" style="height:38px;width:auto;display:block;object-fit:contain;"></div>
+                <div style="background:rgba(255,255,255,0.95);border-radius:0.6rem;padding:0.3rem 0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.3);"><img src="assets/partners/strategic/8.png"   style="height:38px;width:auto;display:block;object-fit:contain;"></div>
+                <div style="background:rgba(255,255,255,0.95);border-radius:0.6rem;padding:0.3rem 0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.3);"><img src="assets/partners/strategic/5.png"   style="height:38px;width:auto;display:block;object-fit:contain;"></div>
+                <!-- local -->
+                <div style="background:rgba(255,255,255,0.95);border-radius:0.6rem;padding:0.3rem 0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.3);"><img src="assets/partners/local/1 (2).png" style="height:38px;width:auto;display:block;object-fit:contain;"></div>
+                <div style="background:rgba(255,255,255,0.95);border-radius:0.6rem;padding:0.3rem 0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.3);"><img src="assets/partners/local/4.png"     style="height:38px;width:auto;display:block;object-fit:contain;"></div>
+                <div style="background:rgba(255,255,255,0.95);border-radius:0.6rem;padding:0.3rem 0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.3);"><img src="assets/partners/local/9.png"     style="height:38px;width:auto;display:block;object-fit:contain;"></div>
+                <div style="background:rgba(255,255,255,0.95);border-radius:0.6rem;padding:0.3rem 0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.3);"><img src="assets/partners/local/11.jpeg"   style="height:38px;width:auto;display:block;object-fit:contain;"></div>
+                <div style="background:rgba(255,255,255,0.95);border-radius:0.6rem;padding:0.3rem 0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.3);"><img src="assets/partners/local/14.jpeg"   style="height:38px;width:auto;display:block;object-fit:contain;"></div>
+                <div style="background:rgba(255,255,255,0.95);border-radius:0.6rem;padding:0.3rem 0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.3);"><img src="assets/partners/local/15.png"    style="height:38px;width:auto;display:block;object-fit:contain;"></div>
+                <!-- regional -->
+                <div style="background:rgba(255,255,255,0.95);border-radius:0.6rem;padding:0.3rem 0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.3);"><img src="assets/partners/regional/2.png"  style="height:38px;width:auto;display:block;object-fit:contain;"></div>
+                <div style="background:rgba(255,255,255,0.95);border-radius:0.6rem;padding:0.3rem 0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.3);"><img src="assets/partners/regional/3.png"  style="height:38px;width:auto;display:block;object-fit:contain;"></div>
+                <div style="background:rgba(255,255,255,0.95);border-radius:0.6rem;padding:0.3rem 0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.3);"><img src="assets/partners/regional/6.png"  style="height:38px;width:auto;display:block;object-fit:contain;"></div>
+                <div style="background:rgba(255,255,255,0.95);border-radius:0.6rem;padding:0.3rem 0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.3);"><img src="assets/partners/regional/7.png"  style="height:38px;width:auto;display:block;object-fit:contain;"></div>
+                <div style="background:rgba(255,255,255,0.95);border-radius:0.6rem;padding:0.3rem 0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.3);"><img src="assets/partners/regional/12.png" style="height:38px;width:auto;display:block;object-fit:contain;"></div>
+                <div style="background:rgba(255,255,255,0.95);border-radius:0.6rem;padding:0.3rem 0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.3);"><img src="assets/partners/regional/13.png" style="height:38px;width:auto;display:block;object-fit:contain;"></div>
+            </div>
 
         </div>
         <div class="wm">16</div>
@@ -1362,6 +1392,33 @@
       }, 300);
     }
 
+    /* ======== CLOSING MOSAIC ======== */
+    function buildClosingMosaic() {
+      var mosaic = document.getElementById('closing-mosaic');
+      if (!mosaic || mosaic.childElementCount > 0) return;
+      // جمع كل الصور من sectorData
+      var allImgs = [];
+      Object.values(sectorData).forEach(function(s){ allImgs = allImgs.concat(s.images); });
+      // خلط عشوائي
+      for (var i = allImgs.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = allImgs[i]; allImgs[i] = allImgs[j]; allImgs[j] = tmp;
+      }
+      // 72 خلية (12×6)
+      var needed = 72;
+      while (allImgs.length < needed) allImgs = allImgs.concat(allImgs);
+      allImgs = allImgs.slice(0, needed);
+      allImgs.forEach(function(src) {
+        var div = document.createElement('div');
+        div.style.cssText = 'overflow:hidden;';
+        var img = document.createElement('img');
+        img.src = src;
+        img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+        div.appendChild(img);
+        mosaic.appendChild(div);
+      });
+    }
+
     function openLightbox(src) {
       var lb = document.getElementById('imgLightbox');
       document.getElementById('lightboxImg').src = src;
@@ -1481,6 +1538,7 @@
         setTimeout(() => {
             slides[i].classList.add('active');
             if (i === 12 || i === 13 || i === 14) triggerPartners(i);
+            if (i === 15) buildClosingMosaic();
         }, 400);
         document.getElementById('arrowUp').style.display   = i > 0        ? 'flex' : 'none';
         document.getElementById('arrowDown').style.display = i < total - 1 ? 'flex' : 'none';
