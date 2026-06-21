@@ -130,6 +130,14 @@
             display: inline-block;
         }
 
+        /* ===================== CLOSING MOSAIC ===================== */
+        @keyframes mosaicLeft  { from { transform: translateX(0);    } to { transform: translateX(-50%); } }
+        @keyframes mosaicRight { from { transform: translateX(-50%); } to { transform: translateX(0);    } }
+        #closing-mosaic { display:flex; flex-direction:column; }
+        #closing-mosaic .mosaic-row { overflow:hidden; flex:1; }
+        #closing-mosaic .mosaic-track { display:flex; gap:3px; height:100%; will-change:transform; }
+        #closing-mosaic .mosaic-track img { height:100%; width:auto; object-fit:cover; display:block; flex-shrink:0; }
+
         /* ===================== WATERMARK ===================== */
         .wm {
             position: absolute;
@@ -1106,8 +1114,8 @@
     <!-- SLIDE 15 — الشريحة الختامية -->
     <div class="slide" id="slide-15" style="position:relative;overflow:hidden;">
 
-        <!-- طبقة 1: خلفية الصور -->
-        <div id="closing-mosaic" style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(6,1fr);gap:3px;z-index:0;"></div>
+        <!-- طبقة 1: خلفية الصور المتحركة -->
+        <div id="closing-mosaic" style="position:absolute;inset:0;gap:3px;z-index:0;"></div>
 
         <!-- طبقة 2: أوفرلاي أزرق -->
         <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(2,10,30,0.82) 0%,rgba(4,20,55,0.78) 50%,rgba(2,10,30,0.85) 100%);z-index:1;"></div>
@@ -1396,26 +1404,50 @@
     function buildClosingMosaic() {
       var mosaic = document.getElementById('closing-mosaic');
       if (!mosaic || mosaic.childElementCount > 0) return;
-      // جمع كل الصور من sectorData
+
       var allImgs = [];
       Object.values(sectorData).forEach(function(s){ allImgs = allImgs.concat(s.images); });
+
       // خلط عشوائي
       for (var i = allImgs.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var tmp = allImgs[i]; allImgs[i] = allImgs[j]; allImgs[j] = tmp;
       }
-      // 72 خلية (12×6)
-      var needed = 72;
-      while (allImgs.length < needed) allImgs = allImgs.concat(allImgs);
-      allImgs = allImgs.slice(0, needed);
-      allImgs.forEach(function(src) {
-        var div = document.createElement('div');
-        div.style.cssText = 'overflow:hidden;';
-        var img = document.createElement('img');
-        img.src = src;
-        img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
-        div.appendChild(img);
-        mosaic.appendChild(div);
+
+      // 4 صفوف — كل صف بسرعة واتجاه مختلف
+      var rows = [
+        { anim: 'mosaicLeft',  dur: '32s' },
+        { anim: 'mosaicRight', dur: '24s' },
+        { anim: 'mosaicLeft',  dur: '40s' },
+        { anim: 'mosaicRight', dur: '20s' },
+      ];
+
+      var idx = 0;
+      rows.forEach(function(cfg) {
+        var perRow = 14;
+        var rowImgs = [];
+        for (var k = 0; k < perRow; k++) {
+          rowImgs.push(allImgs[idx % allImgs.length]);
+          idx++;
+        }
+
+        var rowWrap = document.createElement('div');
+        rowWrap.className = 'mosaic-row';
+
+        var track = document.createElement('div');
+        track.className = 'mosaic-track';
+        track.style.animation = cfg.anim + ' ' + cfg.dur + ' linear infinite';
+
+        // ضاعف الصور لحلقة لا نهائية سلسة
+        rowImgs.concat(rowImgs).forEach(function(src) {
+          var img = document.createElement('img');
+          img.src = src;
+          img.loading = 'lazy';
+          track.appendChild(img);
+        });
+
+        rowWrap.appendChild(track);
+        mosaic.appendChild(rowWrap);
       });
     }
 
