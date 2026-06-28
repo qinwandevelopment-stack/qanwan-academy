@@ -248,9 +248,6 @@
             border-color: #bfdbfe;
         }
         .report-action.secondary:hover { background: #eff6ff; }
-        #fixed-export-btn { transition: all 0.3s ease; }
-        .export-mode .report-toolbar, .export-mode .logo-prompt { display: none !important; }
-
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -276,14 +273,6 @@
             <span class="material-symbols-rounded">arrow_back</span>
             رجوع
         </a>
-        <button type="button" class="report-action secondary" onclick="window.print()" title="طباعة العرض أو حفظه PDF">
-            <span class="material-symbols-rounded">print</span>
-            طباعة
-        </button>
-        <button type="button" id="fixed-export-btn" onclick="exportToHTML()" class="report-action" title="تصدير نسخة HTML نظيفة">
-            <span class="material-symbols-rounded">download</span>
-            تصدير
-        </button>
     </div>
 
     <main class="container mx-auto px-4 md:px-8 max-w-7xl space-y-20 py-20">
@@ -596,23 +585,6 @@
                 }
                 reader.readAsDataURL(input.files[0]);
             }
-        }
-
-        function exportToHTML() {
-            document.documentElement.classList.add('export-mode');
-            setTimeout(() => {
-                const htmlContent = document.documentElement.outerHTML;
-                const blob = new Blob([htmlContent], { type: 'text/html' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'Libyan_Chamber_Full_Strategic_Report.html';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-                document.documentElement.classList.remove('export-mode');
-            }, 100);
         }
     </script>
 
