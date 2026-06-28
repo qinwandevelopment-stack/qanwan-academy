@@ -342,7 +342,7 @@
             --gold-readable: #f4d46a;
             --gold-on-light: #8a6208;
             --gold-on-light-strong: #684704;
-                --gold-on-light-soft: #5f4812;
+            --gold-on-light-soft: #5f4812;
             --gold-panel-bg: #fffaf0;
         }
         body {
@@ -464,6 +464,46 @@
         .border-blue-100,
         .border-blue-200 {
             border-color: rgba(212, 175, 55, 0.46) !important;
+        }
+        body.report-body main :where(h1, h2, h3, h4, h5, h6, p, li, span, div, strong, em, small, a) {
+            color: var(--gold-on-light) !important;
+        }
+        body.report-body main [class*="text-blue-"],
+        body.report-body main [class*="text-slate-"],
+        body.report-body main [class*="text-purple-"],
+        body.report-body main [class*="text-orange-"] {
+            color: var(--gold-on-light) !important;
+        }
+        body.report-body main :where(h1, h2, h3, h4, .wf-title, .roadmap-title, .goal-box h4) {
+            color: var(--gold-on-light-strong) !important;
+        }
+        body.report-body main section > .text-center h2,
+        body.report-body main section h2,
+        body.report-body main #logo-placeholder,
+        body.report-body main #logo-placeholder * {
+            color: var(--gold-on-light-strong) !important;
+        }
+        body.report-body main :where(p, li, .wf-step, .goal-box p, .text-slate-500, .text-slate-600, .text-slate-700) {
+            color: var(--gold-on-light-soft) !important;
+        }
+        #report-hero,
+        #report-hero *,
+        body.report-body main .category-header,
+        body.report-body main .category-header * {
+            color: var(--gold-readable) !important;
+        }
+        .category-header,
+        .category-header.revenue,
+        .category-header.erp,
+        .category-header.support,
+        .category-header.legal,
+        .category-header.infra,
+        .category-header.bi,
+        .category-header.edu {
+            background: linear-gradient(90deg, #3a2805, #7a5200, #d4af37) !important;
+        }
+        .decoration-blue-200 {
+            text-decoration-color: rgba(212, 175, 55, 0.55) !important;
         }
         footer,
         footer p {
